@@ -1,0 +1,85 @@
+
+{
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                ]
+            }
+        ],
+        "display_date":"2011/01/05 07:36:00 -0800",
+        "full_url":"http://app-incubator.xebia.com/some-quick-experiments-with-web-sockets-using",
+        "title":"Some quick experiments with Web sockets using Atmosphere",
+        "is_private":false,
+        "user":
+        {
+            "profile_pic":"http://files.posterous.com/user_profile_pics/495744/my-face-adjusted.jpg",
+            "last_activity":"2011/01/13 04:36:53 -0800",
+            "nickname":"Age",
+            "lastname":"Mooij",
+            "id":474988,
+            "firstname":"Age"
+        },
+        "id":38597076,
+        "body_html":"\u003Cp\u003ELast night me,
+         Iwein,
+         Frank,
+         Arjan,
+         and Freek spent some time playing with one of the basic Web Sockets samples of the \u003Ca href=\"http://atmosphere.java.net/\"\u003EAtmosphere framework\u003C/a\u003E. I had read a few things about Atmosphere before,
+         especially about its ability to provide Web Sockets support while still gracefully degrading back to Comet/long polling/etc. for browsers that don't support Web Sockets yet. We decided to start with the simple sample app called \"\u003Ca href=\"http://jfarcand.wordpress.com/2010/06/15/using-atmospheres-jquery-plug-in-to-build-applicationsupporting-both-websocket-and-comet/\"\u003EAtmosphere JQuery PlugIn PubSub with support for WebSocket\u003C/a\u003E\",
+         which looked like a promising beginning.\u003C/p\u003E\r\n\u003Cp\u003E\u0026lt;!--more--\u003E\u003C/p\u003E\r\n\u003Cp\u003EUnfortunately we ran into problems almost immediately. The download link to the sample sources was broken,
+         which was quickly fixed with some manual URL hacking,
+         and it turned out that those sources were not complete either since the webapp parts were missing and there was no way to build the project. We quickly decided to just clone the atmosphere repository on GitHub (\u003Cstrong\u003Egit clone git://github.com/Atmosphere/atmosphere.git\u003C/strong\u003E).\u003C/p\u003E\r\n\u003Cp\u003EI tried to build the complete project but we had to stop it after a while because it turned out to be the longest build I have ever run,
+         especially since we were on an overburdened slow network and the build needed to download a significant portion of the internet. I restarted the build this afternoon on a fast connection and the full build still took\u0026nbsp;18:34.949s. We ended up copying the sample project we were most interested in to a new project,
+         created a new Maven pom by combining a tree of Atmosphere poms and,
+         after some trial and error,
+         produced a project that compiled without problems.\u003C/p\u003E\r\n\u003Cp\u003EThe next step was of course to run it so we ran \u003Cstrong\u003Emvn jetty:run\u003C/strong\u003E. Unfortunately this failed with a lot of dependency problems. Some more trial and error (aka intelligent guesswork) turned up a dependency on a broken release of the Maven Jetty plugin (don't use 8.0.0.M1,
+         we upgraded to M2) and the need to run \u003Cstrong\u003Emvn jetty:run-war\u003C/strong\u003E. After all of that,
+         we had a running sample app ready for testing.\u003C/p\u003E\r\n\u003Cp\u003EWe were up for another dissapointment though. We connected to the app using both Safari on Mac,
+         Chrome (versions 9 and 10) on Mac,
+         and Chrome on Windows (version 9) but we could not get the app to work using either the autodetect mode or the explicit Web Sockets mode. The only way we could send any messages was by manually setting the protocol to \"Http Streaming\".\u003C/p\u003E\r\n\u003Cp\u003EWe had heard that Firefox had disabled their Web sockets support so initially we thought it was our browsers but we tested both Chrome and Safari using the \u003Ca href=\"http://websocket.org/echo.html\"\u003EEcho server test on websocket.org\u003C/a\u003E and that worked fine.\u003C/p\u003E\r\n\u003Cp\u003EBy this time our evening was over without much to show for it. All in all our attempts at using Atmosphere were not very productive,
+         although I do have to mention that we didn't exactly spent a lot of time reading through all the available articles and white papers. But we are still determined to get more experience with web sockets and solutions that allow for\u0026nbsp;graceful protocol degradation\u0026nbsp;so next time we will try another framework. \u003Ca href=\"http://socket.io/\"\u003ESocket.IO\u003C/a\u003E looks interesting and as an added bonus it will allow us to get some experience with \u003Ca href=\"http://nodejs.org/\"\u003ENode.JS\u003C/a\u003E too,
+         so stay tuned for that.\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E",
+        "body_full":"\u003Cp\u003ELast night me,
+         Iwein,
+         Frank,
+         Arjan,
+         and Freek spent some time playing with one of the basic Web Sockets samples of the \u003Ca href=\"http://atmosphere.java.net/\"\u003EAtmosphere framework\u003C/a\u003E. I had read a few things about Atmosphere before,
+         especially about its ability to provide Web Sockets support while still gracefully degrading back to Comet/long polling/etc. for browsers that don't support Web Sockets yet. We decided to start with the simple sample app called \"\u003Ca href=\"http://jfarcand.wordpress.com/2010/06/15/using-atmospheres-jquery-plug-in-to-build-applicationsupporting-both-websocket-and-comet/\"\u003EAtmosphere JQuery PlugIn PubSub with support for WebSocket\u003C/a\u003E\",
+         which looked like a promising beginning.\u003C/p\u003E\r\n\u003Cp\u003E\u0026lt;!--more--\u003E\u003C/p\u003E\r\n\u003Cp\u003EUnfortunately we ran into problems almost immediately. The download link to the sample sources was broken,
+         which was quickly fixed with some manual URL hacking,
+         and it turned out that those sources were not complete either since the webapp parts were missing and there was no way to build the project. We quickly decided to just clone the atmosphere repository on GitHub (\u003Cstrong\u003Egit clone git://github.com/Atmosphere/atmosphere.git\u003C/strong\u003E).\u003C/p\u003E\r\n\u003Cp\u003EI tried to build the complete project but we had to stop it after a while because it turned out to be the longest build I have ever run,
+         especially since we were on an overburdened slow network and the build needed to download a significant portion of the internet. I restarted the build this afternoon on a fast connection and the full build still took\u0026nbsp;18:34.949s. We ended up copying the sample project we were most interested in to a new project,
+         created a new Maven pom by combining a tree of Atmosphere poms and,
+         after some trial and error,
+         produced a project that compiled without problems.\u003C/p\u003E\r\n\u003Cp\u003EThe next step was of course to run it so we ran \u003Cstrong\u003Emvn jetty:run\u003C/strong\u003E. Unfortunately this failed with a lot of dependency problems. Some more trial and error (aka intelligent guesswork) turned up a dependency on a broken release of the Maven Jetty plugin (don't use 8.0.0.M1,
+         we upgraded to M2) and the need to run \u003Cstrong\u003Emvn jetty:run-war\u003C/strong\u003E. After all of that,
+         we had a running sample app ready for testing.\u003C/p\u003E\r\n\u003Cp\u003EWe were up for another dissapointment though. We connected to the app using both Safari on Mac,
+         Chrome (versions 9 and 10) on Mac,
+         and Chrome on Windows (version 9) but we could not get the app to work using either the autodetect mode or the explicit Web Sockets mode. The only way we could send any messages was by manually setting the protocol to \"Http Streaming\".\u003C/p\u003E\r\n\u003Cp\u003EWe had heard that Firefox had disabled their Web sockets support so initially we thought it was our browsers but we tested both Chrome and Safari using the \u003Ca href=\"http://websocket.org/echo.html\"\u003EEcho server test on websocket.org\u003C/a\u003E and that worked fine.\u003C/p\u003E\r\n\u003Cp\u003EBy this time our evening was over without much to show for it. All in all our attempts at using Atmosphere were not very productive,
+         although I do have to mention that we didn't exactly spent a lot of time reading through all the available articles and white papers. But we are still determined to get more experience with web sockets and solutions that allow for\u0026nbsp;graceful protocol degradation\u0026nbsp;so next time we will try another framework. \u003Ca href=\"http://socket.io/\"\u003ESocket.IO\u003C/a\u003E looks interesting and as an added bonus it will allow us to get some experience with \u003Ca href=\"http://nodejs.org/\"\u003ENode.JS\u003C/a\u003E too,
+         so stay tuned for that.\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E",
+        "tags":
+        [
+            {
+                "id":15326,
+                "name":"atmosphere"
+            },
+            {
+                "id":341309,
+                "name":"websockets"
+            }
+        ],
+        "site_id":1191595
+    }

@@ -1,0 +1,743 @@
+
+[
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                ]
+            }
+        ],
+        "display_date":"2011/01/05 07:36:00 -0800",
+        "full_url":"http://app-incubator.xebia.com/some-quick-experiments-with-web-sockets-using",
+        "title":"Some quick experiments with Web sockets using Atmosphere",
+        "is_private":false,
+        "user":
+        {
+            "profile_pic":"http://files.posterous.com/user_profile_pics/495744/my-face-adjusted.jpg",
+            "last_activity":"2011/01/13 04:36:53 -0800",
+            "nickname":"Age",
+            "lastname":"Mooij",
+            "id":474988,
+            "firstname":"Age"
+        },
+        "id":38597076,
+        "body_html":"\u003Cp\u003ELast night me,
+         Iwein,
+         Frank,
+         Arjan,
+         and Freek spent some time playing with one of the basic Web Sockets samples of the \u003Ca href=\"http://atmosphere.java.net/\"\u003EAtmosphere framework\u003C/a\u003E. I had read a few things about Atmosphere before,
+         especially about its ability to provide Web Sockets support while still gracefully degrading back to Comet/long polling/etc. for browsers that don't support Web Sockets yet. We decided to start with the simple sample app called \"\u003Ca href=\"http://jfarcand.wordpress.com/2010/06/15/using-atmospheres-jquery-plug-in-to-build-applicationsupporting-both-websocket-and-comet/\"\u003EAtmosphere JQuery PlugIn PubSub with support for WebSocket\u003C/a\u003E\",
+         which looked like a promising beginning.\u003C/p\u003E\r\n\u003Cp\u003E\u0026lt;!--more--\u003E\u003C/p\u003E\r\n\u003Cp\u003EUnfortunately we ran into problems almost immediately. The download link to the sample sources was broken,
+         which was quickly fixed with some manual URL hacking,
+         and it turned out that those sources were not complete either since the webapp parts were missing and there was no way to build the project. We quickly decided to just clone the atmosphere repository on GitHub (\u003Cstrong\u003Egit clone git://github.com/Atmosphere/atmosphere.git\u003C/strong\u003E).\u003C/p\u003E\r\n\u003Cp\u003EI tried to build the complete project but we had to stop it after a while because it turned out to be the longest build I have ever run,
+         especially since we were on an overburdened slow network and the build needed to download a significant portion of the internet. I restarted the build this afternoon on a fast connection and the full build still took\u0026nbsp;18:34.949s. We ended up copying the sample project we were most interested in to a new project,
+         created a new Maven pom by combining a tree of Atmosphere poms and,
+         after some trial and error,
+         produced a project that compiled without problems.\u003C/p\u003E\r\n\u003Cp\u003EThe next step was of course to run it so we ran \u003Cstrong\u003Emvn jetty:run\u003C/strong\u003E. Unfortunately this failed with a lot of dependency problems. Some more trial and error (aka intelligent guesswork) turned up a dependency on a broken release of the Maven Jetty plugin (don't use 8.0.0.M1,
+         we upgraded to M2) and the need to run \u003Cstrong\u003Emvn jetty:run-war\u003C/strong\u003E. After all of that,
+         we had a running sample app ready for testing.\u003C/p\u003E\r\n\u003Cp\u003EWe were up for another dissapointment though. We connected to the app using both Safari on Mac,
+         Chrome (versions 9 and 10) on Mac,
+         and Chrome on Windows (version 9) but we could not get the app to work using either the autodetect mode or the explicit Web Sockets mode. The only way we could send any messages was by manually setting the protocol to \"Http Streaming\".\u003C/p\u003E\r\n\u003Cp\u003EWe had heard that Firefox had disabled their Web sockets support so initially we thought it was our browsers but we tested both Chrome and Safari using the \u003Ca href=\"http://websocket.org/echo.html\"\u003EEcho server test on websocket.org\u003C/a\u003E and that worked fine.\u003C/p\u003E\r\n\u003Cp\u003EBy this time our evening was over without much to show for it. All in all our attempts at using Atmosphere were not very productive,
+         although I do have to mention that we didn't exactly spent a lot of time reading through all the available articles and white papers. But we are still determined to get more experience with web sockets and solutions that allow for\u0026nbsp;graceful protocol degradation\u0026nbsp;so next time we will try another framework. \u003Ca href=\"http://socket.io/\"\u003ESocket.IO\u003C/a\u003E looks interesting and as an added bonus it will allow us to get some experience with \u003Ca href=\"http://nodejs.org/\"\u003ENode.JS\u003C/a\u003E too,
+         so stay tuned for that.\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E",
+        "body_full":"\u003Cp\u003ELast night me,
+         Iwein,
+         Frank,
+         Arjan,
+         and Freek spent some time playing with one of the basic Web Sockets samples of the \u003Ca href=\"http://atmosphere.java.net/\"\u003EAtmosphere framework\u003C/a\u003E. I had read a few things about Atmosphere before,
+         especially about its ability to provide Web Sockets support while still gracefully degrading back to Comet/long polling/etc. for browsers that don't support Web Sockets yet. We decided to start with the simple sample app called \"\u003Ca href=\"http://jfarcand.wordpress.com/2010/06/15/using-atmospheres-jquery-plug-in-to-build-applicationsupporting-both-websocket-and-comet/\"\u003EAtmosphere JQuery PlugIn PubSub with support for WebSocket\u003C/a\u003E\",
+         which looked like a promising beginning.\u003C/p\u003E\r\n\u003Cp\u003E\u0026lt;!--more--\u003E\u003C/p\u003E\r\n\u003Cp\u003EUnfortunately we ran into problems almost immediately. The download link to the sample sources was broken,
+         which was quickly fixed with some manual URL hacking,
+         and it turned out that those sources were not complete either since the webapp parts were missing and there was no way to build the project. We quickly decided to just clone the atmosphere repository on GitHub (\u003Cstrong\u003Egit clone git://github.com/Atmosphere/atmosphere.git\u003C/strong\u003E).\u003C/p\u003E\r\n\u003Cp\u003EI tried to build the complete project but we had to stop it after a while because it turned out to be the longest build I have ever run,
+         especially since we were on an overburdened slow network and the build needed to download a significant portion of the internet. I restarted the build this afternoon on a fast connection and the full build still took\u0026nbsp;18:34.949s. We ended up copying the sample project we were most interested in to a new project,
+         created a new Maven pom by combining a tree of Atmosphere poms and,
+         after some trial and error,
+         produced a project that compiled without problems.\u003C/p\u003E\r\n\u003Cp\u003EThe next step was of course to run it so we ran \u003Cstrong\u003Emvn jetty:run\u003C/strong\u003E. Unfortunately this failed with a lot of dependency problems. Some more trial and error (aka intelligent guesswork) turned up a dependency on a broken release of the Maven Jetty plugin (don't use 8.0.0.M1,
+         we upgraded to M2) and the need to run \u003Cstrong\u003Emvn jetty:run-war\u003C/strong\u003E. After all of that,
+         we had a running sample app ready for testing.\u003C/p\u003E\r\n\u003Cp\u003EWe were up for another dissapointment though. We connected to the app using both Safari on Mac,
+         Chrome (versions 9 and 10) on Mac,
+         and Chrome on Windows (version 9) but we could not get the app to work using either the autodetect mode or the explicit Web Sockets mode. The only way we could send any messages was by manually setting the protocol to \"Http Streaming\".\u003C/p\u003E\r\n\u003Cp\u003EWe had heard that Firefox had disabled their Web sockets support so initially we thought it was our browsers but we tested both Chrome and Safari using the \u003Ca href=\"http://websocket.org/echo.html\"\u003EEcho server test on websocket.org\u003C/a\u003E and that worked fine.\u003C/p\u003E\r\n\u003Cp\u003EBy this time our evening was over without much to show for it. All in all our attempts at using Atmosphere were not very productive,
+         although I do have to mention that we didn't exactly spent a lot of time reading through all the available articles and white papers. But we are still determined to get more experience with web sockets and solutions that allow for\u0026nbsp;graceful protocol degradation\u0026nbsp;so next time we will try another framework. \u003Ca href=\"http://socket.io/\"\u003ESocket.IO\u003C/a\u003E looks interesting and as an added bonus it will allow us to get some experience with \u003Ca href=\"http://nodejs.org/\"\u003ENode.JS\u003C/a\u003E too,
+         so stay tuned for that.\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E",
+        "tags":
+        [
+            {
+                "id":15326,
+                "name":"atmosphere"
+            },
+            {
+                "id":341309,
+                "name":"websockets"
+            }
+        ],
+        "site_id":1191595
+    },
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                    {
+                        "full":
+                        {
+                            "username":"Age",
+                            "url":"http://posterous.com/getfile/files.posterous.com/temp-2010-11-28/DGDAvHrIrzztlbkjbpAdigbFfhkBBboHiGJkBBlzsCjFCqfECbEuGrFefedG/Screen_shot_2010-11-28_at_18.13.32.png",
+                            "post_id":34757355,
+                            "size":247,
+                            "width":1251,
+                            "caption":"Meta Pitch: Build an App Incubator Planner App",
+                            "height":563
+                        },
+                        "scaled500":
+                        {
+                            "username":"Age",
+                            "url":"http://posterous.com/getfile/files.posterous.com/temp-2010-11-28/DGDAvHrIrzztlbkjbpAdigbFfhkBBboHiGJkBBlzsCjFCqfECbEuGrFefedG/Screen_shot_2010-11-28_at_18.13.32.png.scaled500.png",
+                            "post_id":34757355,
+                            "size":73,
+                            "width":500,
+                            "caption":"Meta Pitch: Build an App Incubator Planner App",
+                            "height":225
+                        },
+                        "scaled1000":
+                        {
+                            "username":"Age",
+                            "url":"http://posterous.com/getfile/files.posterous.com/temp-2010-11-28/DGDAvHrIrzztlbkjbpAdigbFfhkBBboHiGJkBBlzsCjFCqfECbEuGrFefedG/Screen_shot_2010-11-28_at_18.13.32.png.scaled1000.png",
+                            "post_id":34757355,
+                            "size":242,
+                            "width":1000,
+                            "caption":"Meta Pitch: Build an App Incubator Planner App",
+                            "height":450
+                        }
+                    }
+                ]
+            }
+        ],
+        "display_date":"2010/11/28 09:19:00 -0800",
+        "full_url":"http://app-incubator.xebia.com/meta-pitch-build-an-app-incubator-planner-app",
+        "title":"Meta Pitch: Build an App Incubator Planner App",
+        "is_private":false,
+        "user":
+        {
+            "profile_pic":"http://files.posterous.com/user_profile_pics/495744/my-face-adjusted.jpg",
+            "last_activity":"2011/01/13 04:36:53 -0800",
+            "nickname":"Age",
+            "lastname":"Mooij",
+            "id":474988,
+            "firstname":"Age"
+        },
+        "id":34757355,
+        "body_html":"\u003Cp\u003EThe purpose of the Xebia App Incubator has always been to stimulate innovation,
+         creativity,
+         learning about new technology,
+         and working together with colleagues on cool mini-projects. We started out as a little idea within XSD (Xebia Software Development) but it turns out that people all over Xebia want to join in,
+         so starting January 2011 the App Incubator will be on equal footing with other,
+         more traditional ways to share knowledge with our colleagues (i.e. presentations).\u003C/p\u003E\r\n\u003Cp\u003EThis does make it a little harder to keep track of all the running projects,
+         new project pitches,
+         and results of past projects. Projects can start whenever an initiator finds enough people to form a team and voting will also be done online. I expect that things would soon become very chaotic without some kind of application to keep track of everything. This brings me to a new project proposal me and Friso came up with:\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWhat will we build ?\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EA public facing webapp for pitching,
+         voting,
+         planning and keeping track of AI projects. It will be a public website viewable to the whole world but editable only by Xebia employees (through Crowd login). It will of course also use some cool new technologies to keep it interesting.\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EProposed Features\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003EOverview of all current projects,
+         recently finished projects,
+         accepted future projects (see UI design below)\u003C/li\u003E\r\n\u003Cli\u003EClick-through to project details:\u0026nbsp;       \r\n\u003Cul\u003E\r\n\u003Cli\u003EBlog entries\u003C/li\u003E\r\n\u003Cli\u003EGithub project\u003C/li\u003E\r\n\u003Cli\u003EThreaded discussion (with email notification and reply-by-email support)\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003C/li\u003E\r\n\u003Cli\u003EOverview of current project pitches       \r\n\u003Cul\u003E\r\n\u003Cli\u003ELogged in users can sign up as core team members or contributors\u003C/li\u003E\r\n\u003Cli\u003EPublic users can like or dislike a proposed project\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003C/li\u003E\r\n\u003Cli\u003ELogin through Crowd\u003C/li\u003E\r\n\u003Cli\u003EThe ability to create,
+         update,
+         and schedule projects (for logged in users)\u003C/li\u003E\r\n\u003Cli\u003EAssociate a user with an avatar image through Crowd/Confluence,
+         Twitter,
+         Facebook,
+         Gravatar\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003EI'm sure we can come up with a lots more features as soon as we start actually using this application but lets stick with the above list for version 1.0.\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWhat's the technology stack ?\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EWe will implement this using the already familiar \"REST API with HTML5 frontend\" approach formerly known as \"NoJSP\" with MongoDB as the storage engine.\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003EServer options (choice still to be made):\u0026nbsp;         \r\n\u003Cul\u003E\r\n\u003Cli\u003ENode.JS (Javascript. Expert: Friso)\u003C/li\u003E\r\n\u003Cli\u003EScalatra (Scala. Expert: Age)\u003C/li\u003E\r\n\u003Cli\u003ESpring REST (Java)\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003C/li\u003E\r\n\u003Cli\u003EClient-side Dynamic HTML rendering: Mustache (\u003Ca href=\"http://mustache.github.com/)\"\u003Ehttp://mustache.github.com/)\u003C/a\u003E\u003C/li\u003E\r\n\u003Cli\u003EStorage: MongoDB\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWhat will it look like ?\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EBelow is a little design sketch I did for the front page:\u003C/p\u003E\r\n\u003Cp\u003E
+        [
+            [
+                posterous-content:EsEimqdmGDfcqsFsDvlf
+            ]
+        ]
+        \u003C/p\u003E\r\n\u003Cp\u003EI was inspired by a \u003Ca href=\"http://bit.ly/37sig-iterations\"\u003Epost on the 37 Signals blog\u003C/a\u003E about one of their internal apps. It has the idea of using avatars to show which people are part of a project. Friso came up with the idea of a calendar-like timeline to show an overview of projects.\u003C/p\u003E\r\n\u003Cp\u003EWho wants to join in ?\u003C/p\u003E",
+        "body_full":"\u003Cp\u003EThe purpose of the Xebia App Incubator has always been to stimulate innovation,
+         creativity,
+         learning about new technology,
+         and working together with colleagues on cool mini-projects. We started out as a little idea within XSD (Xebia Software Development) but it turns out that people all over Xebia want to join in,
+         so starting January 2011 the App Incubator will be on equal footing with other,
+         more traditional ways to share knowledge with our colleagues (i.e. presentations).\u003C/p\u003E\r\n\u003Cp\u003EThis does make it a little harder to keep track of all the running projects,
+         new project pitches,
+         and results of past projects. Projects can start whenever an initiator finds enough people to form a team and voting will also be done online. I expect that things would soon become very chaotic without some kind of application to keep track of everything. This brings me to a new project proposal me and Friso came up with:\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWhat will we build ?\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EA public facing webapp for pitching,
+         voting,
+         planning and keeping track of AI projects. It will be a public website viewable to the whole world but editable only by Xebia employees (through Crowd login). It will of course also use some cool new technologies to keep it interesting.\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EProposed Features\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003EOverview of all current projects,
+         recently finished projects,
+         accepted future projects (see UI design below)\u003C/li\u003E\r\n\u003Cli\u003EClick-through to project details:\u0026nbsp;       \r\n\u003Cul\u003E\r\n\u003Cli\u003EBlog entries\u003C/li\u003E\r\n\u003Cli\u003EGithub project\u003C/li\u003E\r\n\u003Cli\u003EThreaded discussion (with email notification and reply-by-email support)\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003C/li\u003E\r\n\u003Cli\u003EOverview of current project pitches       \r\n\u003Cul\u003E\r\n\u003Cli\u003ELogged in users can sign up as core team members or contributors\u003C/li\u003E\r\n\u003Cli\u003EPublic users can like or dislike a proposed project\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003C/li\u003E\r\n\u003Cli\u003ELogin through Crowd\u003C/li\u003E\r\n\u003Cli\u003EThe ability to create,
+         update,
+         and schedule projects (for logged in users)\u003C/li\u003E\r\n\u003Cli\u003EAssociate a user with an avatar image through Crowd/Confluence,
+         Twitter,
+         Facebook,
+         Gravatar\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003EI'm sure we can come up with a lots more features as soon as we start actually using this application but lets stick with the above list for version 1.0.\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWhat's the technology stack ?\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EWe will implement this using the already familiar \"REST API with HTML5 frontend\" approach formerly known as \"NoJSP\" with MongoDB as the storage engine.\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003EServer options (choice still to be made):\u0026nbsp;         \r\n\u003Cul\u003E\r\n\u003Cli\u003ENode.JS (Javascript. Expert: Friso)\u003C/li\u003E\r\n\u003Cli\u003EScalatra (Scala. Expert: Age)\u003C/li\u003E\r\n\u003Cli\u003ESpring REST (Java)\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003C/li\u003E\r\n\u003Cli\u003EClient-side Dynamic HTML rendering: Mustache (\u003Ca href=\"http://mustache.github.com/)\"\u003Ehttp://mustache.github.com/)\u003C/a\u003E\u003C/li\u003E\r\n\u003Cli\u003EStorage: MongoDB\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWhat will it look like ?\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EBelow is a little design sketch I did for the front page:\u003C/p\u003E\r\n\u003Cp\u003E\u003Ca href='http://posterous.com/getfile/files.posterous.com/temp-2010-11-28/DGDAvHrIrzztlbkjbpAdigbFfhkBBboHiGJkBBlzsCjFCqfECbEuGrFefedG/Screen_shot_2010-11-28_at_18.13.32.png.scaled1000.png'\u003E\u003Cimg src=\"http://posterous.com/getfile/files.posterous.com/temp-2010-11-28/DGDAvHrIrzztlbkjbpAdigbFfhkBBboHiGJkBBlzsCjFCqfECbEuGrFefedG/Screen_shot_2010-11-28_at_18.13.32.png.scaled500.png\" width=\"500\" height=\"225\"/\u003E\u003C/a\u003E\n\u003C/p\u003E\r\n\u003Cp\u003EI was inspired by a \u003Ca href=\"http://bit.ly/37sig-iterations\"\u003Epost on the 37 Signals blog\u003C/a\u003E about one of their internal apps. It has the idea of using avatars to show which people are part of a project. Friso came up with the idea of a calendar-like timeline to show an overview of projects.\u003C/p\u003E\r\n\u003Cp\u003EWho wants to join in ?\u003C/p\u003E",
+        "tags":
+        [
+        ],
+        "site_id":1191595
+    },
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                    {
+                        "full":
+                        {
+                            "username":"Age",
+                            "url":"http://posterous.com/getfile/files.posterous.com/app-incubator/A5Izvyd4u3xGnqRIBZRHWi1vEBo6vdGHzgfaRz4hF5LWycWOAoQHv8kNIoDc/pitch-winter-2010-votes.jpg",
+                            "post_id":30454226,
+                            "size":244,
+                            "width":1280,
+                            "caption":"The Votes Are In !",
+                            "height":960
+                        },
+                        "scaled500":
+                        {
+                            "username":"Age",
+                            "url":"http://posterous.com/getfile/files.posterous.com/app-incubator/grddGaTQVF4y46Bsz2o4KxXaVIOnQkkexlmd3t0iBi7pX4sKpwBAlh6Y2r3n/pitch-winter-2010-votes.jpg.scaled.500.jpg",
+                            "post_id":30454226,
+                            "size":244,
+                            "width":500,
+                            "caption":"The Votes Are In !",
+                            "height":375
+                        },
+                        "scaled1000":
+                        {
+                            "username":"Age",
+                            "url":"http://posterous.com/getfile/files.posterous.com/app-incubator/qbPcxzKFik5qvdXNlrP9X0yzWJX25BrJLQBtv2fhWMjOK92l82E9mLWAWuWq/pitch-winter-2010-votes.jpg.scaled.1000.jpg",
+                            "post_id":30454226,
+                            "size":244,
+                            "width":1000,
+                            "caption":"The Votes Are In !",
+                            "height":750
+                        }
+                    }
+                ]
+            }
+        ],
+        "display_date":"2010/10/13 14:13:00 -0700",
+        "full_url":"http://app-incubator.xebia.com/the-votes-are-in",
+        "title":"The Votes Are In !",
+        "is_private":false,
+        "user":
+        {
+            "profile_pic":"http://files.posterous.com/user_profile_pics/495744/my-face-adjusted.jpg",
+            "last_activity":"2011/01/13 04:36:53 -0800",
+            "nickname":"Age",
+            "lastname":"Mooij",
+            "id":474988,
+            "firstname":"Age"
+        },
+        "id":30454226,
+        "body_html":"\u003Cp\u003ELast night we had another \"present and pitch\" round and it was bigger and better than ever before. The teams from the previous App Incubator round presented their results (with some slick presentations,
+         one of which has already been posted here) and then people pitched their new ideas,
+         all of which have also been posted here in the last few days. All in all there was a lot of creative energy in the room. \u003Cp /\u003E There was a surprising number of mathematics-based proposals this time and we even had the first stirrings of a \"my mathematics is better than yours\" flamewar. It was also great to see more of our colleagues than ever before be present at the pitching of new projects. \u003Cp /\u003E So here are the results of the jury:\u003C/p\u003E\r\n\u003Cp\u003E
+        [
+            [
+                posterous-content:rhkI4kL3fQBUGJkD1Yr5
+            ]
+        ]
+        \u003C/p\u003E\r\n\u003Cp\u003EThe above picture shows the seven projects as previously posted here (in my crappy handwriting on one of our infamous see-though whiteboards),
+         followed by the initials of everyone in the room as they pledged their support for one project or another. As it is standing now,
+         the \"Profiled News on your Android Phone\" proposal unfortunately didn't make it. Two other projects are a bit on the edge with two votes each,
+         but they will probably be fine since about 5 team members were not present last night to cast their votes. The rest made it through the votes with flying colors. \u003Cp /\u003E So now that the campaign and the elections are over,
+         it is time to get back to coding. We'll start work on these projects at the first session,
+         which is in two weeks on Tuesday October 26th at the usual location (Xebia offices at Laapersveldt,
+         Hilversum,
+         the Netherlands). See you there !\u003C/p\u003E",
+        "body_full":"\u003Cp\u003ELast night we had another \"present and pitch\" round and it was bigger and better than ever before. The teams from the previous App Incubator round presented their results (with some slick presentations,
+         one of which has already been posted here) and then people pitched their new ideas,
+         all of which have also been posted here in the last few days. All in all there was a lot of creative energy in the room. \u003Cp /\u003E There was a surprising number of mathematics-based proposals this time and we even had the first stirrings of a \"my mathematics is better than yours\" flamewar. It was also great to see more of our colleagues than ever before be present at the pitching of new projects. \u003Cp /\u003E So here are the results of the jury:\u003C/p\u003E\r\n\u003Cp\u003E\u003Ca href='http://posterous.com/getfile/files.posterous.com/app-incubator/qbPcxzKFik5qvdXNlrP9X0yzWJX25BrJLQBtv2fhWMjOK92l82E9mLWAWuWq/pitch-winter-2010-votes.jpg.scaled.1000.jpg'\u003E\u003Cimg src=\"http://posterous.com/getfile/files.posterous.com/app-incubator/grddGaTQVF4y46Bsz2o4KxXaVIOnQkkexlmd3t0iBi7pX4sKpwBAlh6Y2r3n/pitch-winter-2010-votes.jpg.scaled.500.jpg\" width=\"500\" height=\"375\"/\u003E\u003C/a\u003E\n\u003C/p\u003E\r\n\u003Cp\u003EThe above picture shows the seven projects as previously posted here (in my crappy handwriting on one of our infamous see-though whiteboards),
+         followed by the initials of everyone in the room as they pledged their support for one project or another. As it is standing now,
+         the \"Profiled News on your Android Phone\" proposal unfortunately didn't make it. Two other projects are a bit on the edge with two votes each,
+         but they will probably be fine since about 5 team members were not present last night to cast their votes. The rest made it through the votes with flying colors. \u003Cp /\u003E So now that the campaign and the elections are over,
+         it is time to get back to coding. We'll start work on these projects at the first session,
+         which is in two weeks on Tuesday October 26th at the usual location (Xebia offices at Laapersveldt,
+         Hilversum,
+         the Netherlands). See you there !\u003C/p\u003E",
+        "tags":
+        [
+            {
+                "id":12215,
+                "name":"results"
+            }
+        ],
+        "site_id":1191595
+    },
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                ]
+            }
+        ],
+        "display_date":"2010/10/13 01:55:00 -0700",
+        "full_url":"http://app-incubator.xebia.com/nojsp-presentation",
+        "title":"NoJSP presentation",
+        "is_private":false,
+        "user":
+        {
+            "profile_pic":"http://files.posterous.com/user_profile_pics/724452/AlbertSikkema.jpg",
+            "last_activity":"2010/11/19 00:09:49 -0800",
+            "nickname":"Albert",
+            "lastname":"Sikkema",
+            "id":693623,
+            "firstname":"Albert"
+        },
+        "id":30390725,
+        "body_html":"\u003Cp\u003EYesterday we did our final presentation on the noJSP incubator project. Watch the cool prezi presentation \u003Ca href=\"http://prezi.com/bhhgzkgnb4ns/nojsp/\" title=\"NoJSP presentation\" target=\"_blank\"\u003Ehere!\u003C/a\u003E\u003Cbr /\u003EWe had a lot of fun,
+         experienced with a new technology and learned a lot.\u003C/p\u003E",
+        "body_full":"\u003Cp\u003EYesterday we did our final presentation on the noJSP incubator project. Watch the cool prezi presentation \u003Ca href=\"http://prezi.com/bhhgzkgnb4ns/nojsp/\" title=\"NoJSP presentation\" target=\"_blank\"\u003Ehere!\u003C/a\u003E\u003Cbr /\u003EWe had a lot of fun,
+         experienced with a new technology and learned a lot.\u003C/p\u003E",
+        "tags":
+        [
+        ],
+        "site_id":1191595
+    },
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                ]
+            }
+        ],
+        "display_date":"2010/10/11 12:30:00 -0700",
+        "full_url":"http://app-incubator.xebia.com/project-pitch-realtime-webapps-with-websocket",
+        "title":"Project Pitch: Realtime Webapps with Web Sockets and Atmosphere",
+        "is_private":false,
+        "user":
+        {
+            "profile_pic":"http://files.posterous.com/user_profile_pics/495744/my-face-adjusted.jpg",
+            "last_activity":"2011/01/13 04:36:53 -0800",
+            "nickname":"Age",
+            "lastname":"Mooij",
+            "id":474988,
+            "firstname":"Age"
+        },
+        "id":30253627,
+        "body_html":"\u003Cp\u003E\u003Cspan style=\"font-size: small;\"\u003EYou might not have realized it yet but we are now squarely in the age of the realtime web. Twitter is migrating towards \"streaming\" interfaces,
+         Google Docs allows you to interact with coauthors in realtime,
+         Google search has gone \"instant\",
+         and just about anyone wants to show you realtime analytical data.\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p2\"\u003E\u003Cspan style=\"font-size: small;\"\u003E\u003Cstrong\u003EBut how does all this data get to your browser ?\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003EFirst we hacked browsers using Ajax polling,
+         then we hacked server side connections and called it Comet,
+         and now,
+         finally,
+         we have a properly designed,
+         non-hacked solution called Web Sockets\u0026nbsp;(see \u003Ca href=\"http://en.wikipedia.org/wiki/WebSockets\" title=\"Wikipedia on Web Sockets\" target=\"_blank\"\u003EWikipedia\u003C/a\u003E,
+         \u003Ca href=\"http://www.w3.org/TR/websockets/\" title=\"W3C Web Sockets API\" target=\"_blank\"\u003EW3C\u003C/a\u003E).\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp\u003E\u003Cspan style=\"font-size: small;\"\u003ESupport for all of the above has slowly made its way to all the browsers and web application servers so how do we go about writing a realtime web application that gracefully degrades from Web Sockets,
+         through Comet,
+         all the way to simple polling without writing a lot of code ? The answer,
+         or at least the Java answer,
+         is called \u003Ca href=\"atmosphere.dev.java.net\" title=\"Atmosphere\" target=\"_blank\"\u003EAtmosphere\u003C/a\u003E\u0026nbsp;(FYI,
+         the Javascript answer is called \u003Ca href=\"http://socket.io/\" title=\"Socket.IO\" target=\"_blank\"\u003ESocket.IO\u003C/a\u003E,
+         built on \u003Ca href=\"http://nodejs.org/\" title=\"Node.JS\"\u003ENode.js\u003C/a\u003E).\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003E\u003Cstrong\u003ESo what's the project ?\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003EI'm glad you asked. In order to gain some experience with writing realtime applications,
+         using the best combination of client-side and server-side technologies,
+         we need to write ourselves some Atmosphere code. In order to keep it simple,
+         I propose the following simple application: Counters\"R\"Us\u003C/span\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ethe application keeps track of 10 (or pick any number) counters\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ethese counters are updated at unpredictable intervals by a background job (a simple thread with a semi-random delay)\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Eeach counter is displayed on a unique page\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ewhen your browser has such a page open,
+         it will receive realtime updates for that counter only (i.e. not all updates should go to all browsers)\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Euse Atmosphere,
+         REST,
+         JSON on the server side\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Euse the Atmosphere JQuery plugin for the browser side\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ewe test with loads of concurrent browsers,
+         using the cloud if we have to\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ebonus feature: make the counter display the number of active browsers connected to its page\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003EIf this is way easier than it sounds,
+         we can try the same thing but then with Socket.IO in Javascript.\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003ELet's get realtime !\u003C/span\u003E\u003C/p\u003E",
+        "body_full":"\u003Cp\u003E\u003Cspan style=\"font-size: small;\"\u003EYou might not have realized it yet but we are now squarely in the age of the realtime web. Twitter is migrating towards \"streaming\" interfaces,
+         Google Docs allows you to interact with coauthors in realtime,
+         Google search has gone \"instant\",
+         and just about anyone wants to show you realtime analytical data.\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p2\"\u003E\u003Cspan style=\"font-size: small;\"\u003E\u003Cstrong\u003EBut how does all this data get to your browser ?\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003EFirst we hacked browsers using Ajax polling,
+         then we hacked server side connections and called it Comet,
+         and now,
+         finally,
+         we have a properly designed,
+         non-hacked solution called Web Sockets\u0026nbsp;(see \u003Ca href=\"http://en.wikipedia.org/wiki/WebSockets\" title=\"Wikipedia on Web Sockets\" target=\"_blank\"\u003EWikipedia\u003C/a\u003E,
+         \u003Ca href=\"http://www.w3.org/TR/websockets/\" title=\"W3C Web Sockets API\" target=\"_blank\"\u003EW3C\u003C/a\u003E).\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp\u003E\u003Cspan style=\"font-size: small;\"\u003ESupport for all of the above has slowly made its way to all the browsers and web application servers so how do we go about writing a realtime web application that gracefully degrades from Web Sockets,
+         through Comet,
+         all the way to simple polling without writing a lot of code ? The answer,
+         or at least the Java answer,
+         is called \u003Ca href=\"atmosphere.dev.java.net\" title=\"Atmosphere\" target=\"_blank\"\u003EAtmosphere\u003C/a\u003E\u0026nbsp;(FYI,
+         the Javascript answer is called \u003Ca href=\"http://socket.io/\" title=\"Socket.IO\" target=\"_blank\"\u003ESocket.IO\u003C/a\u003E,
+         built on \u003Ca href=\"http://nodejs.org/\" title=\"Node.JS\"\u003ENode.js\u003C/a\u003E).\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003E\u003Cstrong\u003ESo what's the project ?\u003C/strong\u003E\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003EI'm glad you asked. In order to gain some experience with writing realtime applications,
+         using the best combination of client-side and server-side technologies,
+         we need to write ourselves some Atmosphere code. In order to keep it simple,
+         I propose the following simple application: Counters\"R\"Us\u003C/span\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ethe application keeps track of 10 (or pick any number) counters\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ethese counters are updated at unpredictable intervals by a background job (a simple thread with a semi-random delay)\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Eeach counter is displayed on a unique page\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ewhen your browser has such a page open,
+         it will receive realtime updates for that counter only (i.e. not all updates should go to all browsers)\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Euse Atmosphere,
+         REST,
+         JSON on the server side\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Euse the Atmosphere JQuery plugin for the browser side\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ewe test with loads of concurrent browsers,
+         using the cloud if we have to\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan style=\"font-size: small;\"\u003Ebonus feature: make the counter display the number of active browsers connected to its page\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003EIf this is way easier than it sounds,
+         we can try the same thing but then with Socket.IO in Javascript.\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp class=\"p1\"\u003E\u003Cspan style=\"font-size: small;\"\u003ELet's get realtime !\u003C/span\u003E\u003C/p\u003E",
+        "tags":
+        [
+            {
+                "id":15326,
+                "name":"atmosphere"
+            },
+            {
+                "id":19309,
+                "name":"comet"
+            },
+            {
+                "id":1308343,
+                "name":"pitchwinter2010"
+            },
+            {
+                "id":30686,
+                "name":"realtime"
+            },
+            {
+                "id":1145257,
+                "name":"socketio"
+            },
+            {
+                "id":347203,
+                "name":"websocket"
+            }
+        ],
+        "site_id":1191595
+    },
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                ]
+            }
+        ],
+        "display_date":"2010/10/11 11:28:00 -0700",
+        "full_url":"http://app-incubator.xebia.com/project-pitch-profiled-news-on-your-android-p",
+        "title":"Project Pitch: Profiled News on your Android phone",
+        "is_private":false,
+        "user":null,
+        "id":30243190,
+        "body_html":"\u003Cp\u003E\u003Cstrong\u003EWhy?\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EOne off the missions in Xebia I heard about is how to become thought leader in Mobile. This simple sentence trigger me,
+         about 4 years ago I had an business Idea. The idea was to create a digital printed newspaper which will be personalized by sending sms messages to a service which could make an profile and match articles which you will also like. Last I saw an initiative which does something which looks a little bit like this,
+         it is named Flipboard and is\u0026nbsp;becoming\u0026nbsp;very\u0026nbsp;popular.\u003Cbr /\u003EIf we can also make such an popular application we will make fame in the Mobile development scenes.\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWhat\u003C/strong\u003E\u003Cbr /\u003EThe Idea is to create an interface for Android (and maybe later for other platforms) where you will get: \u003Cbr /\u003E1. A list of articles ordered by the fact how well your profile thinks you like it (after about 10 - 20 click the profile will work pretty well). \u003Cbr /\u003E2. A button to add rss feeds which will trigger a process to add RSS feeds and tell where the text of the articles is places on those pages to be able to parse the contents.,
+         this button is optional since everyone will see content from all feeds (only the top which they will likely like). \u003Cp /\u003E When we create this application and are able to become as popular as Flipboard is becoming now our names will be in the mobile communities! \u003Cbr /\u003EWhy didn't I create this application by myself? I justs do not have enough time. \u003Cp /\u003E \u003Cstrong\u003EWhat do we need for this project? \u003C/strong\u003E\u003Cbr /\u003E1. Someone who will create the Android Frontend \u003Cbr /\u003E2. Someone who will create the service backend \u003Cbr /\u003E3. Someone to implement the algorithm (I will do some at least)! \u003Cp /\u003E  \u003Cstrong\u003EWhat I did before\u003C/strong\u003E\u003Cbr /\u003EI once created a demo application based on profiling research. The demo application was able to serve news which got personalised by giving articles an score (-2 --\u0026gt; 2). The personalization will be automatically adjusted and will work based on the following: \u003Cbr /\u003E1. There will be made a group of groups of interesting words for each article. \u003Cbr /\u003E2. The profiles will consist of a profile of there groups with scores based on the ratings. \u003Cp /\u003E The groups of interesting words will be made by an algorithm which I already created once and tested once. (see: \u003Ca href=\"http://onlinelibrary.wiley.com/doi/10.1002/meet.1450430154/abstract)\"\u003Ehttp://onlinelibrary.wiley.com/doi/10.1002/meet.1450430154/abstract)\u003C/a\u003E \u003Cbr /\u003EBasically it works with the following steps: \u003Cbr /\u003E1. Remove stop words \u003Cbr /\u003E2. Stemming (each word in the shortest form) \u003Cbr /\u003E3. Make a non directed graph of biagrams (combine all words off Article A with all words of Article B). \u003Cbr /\u003E4. Weight all edges with the EAMI-SP function which can e found in the research document). \u003Cbr /\u003E5. Create as much groups of words by removing edges with low scores. \u003Cbr /\u003E6. Result: The most imported words grouped by words which mean something to each other.\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003EKind regards,
+        \u003C/p\u003E\r\n\u003Cp\u003EMark Bakker\u003Cbr /\u003E\u003Ca href=\"http://www.twitter.com/markbakkernl\"\u003Ehttp://www.twitter.com/markbakkernl\u003C/a\u003E\u003C/p\u003E",
+        "body_full":"\u003Cp\u003E\u003Cstrong\u003EWhy?\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EOne off the missions in Xebia I heard about is how to become thought leader in Mobile. This simple sentence trigger me,
+         about 4 years ago I had an business Idea. The idea was to create a digital printed newspaper which will be personalized by sending sms messages to a service which could make an profile and match articles which you will also like. Last I saw an initiative which does something which looks a little bit like this,
+         it is named Flipboard and is\u0026nbsp;becoming\u0026nbsp;very\u0026nbsp;popular.\u003Cbr /\u003EIf we can also make such an popular application we will make fame in the Mobile development scenes.\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWhat\u003C/strong\u003E\u003Cbr /\u003EThe Idea is to create an interface for Android (and maybe later for other platforms) where you will get: \u003Cbr /\u003E1. A list of articles ordered by the fact how well your profile thinks you like it (after about 10 - 20 click the profile will work pretty well). \u003Cbr /\u003E2. A button to add rss feeds which will trigger a process to add RSS feeds and tell where the text of the articles is places on those pages to be able to parse the contents.,
+         this button is optional since everyone will see content from all feeds (only the top which they will likely like). \u003Cp /\u003E When we create this application and are able to become as popular as Flipboard is becoming now our names will be in the mobile communities! \u003Cbr /\u003EWhy didn't I create this application by myself? I justs do not have enough time. \u003Cp /\u003E \u003Cstrong\u003EWhat do we need for this project? \u003C/strong\u003E\u003Cbr /\u003E1. Someone who will create the Android Frontend \u003Cbr /\u003E2. Someone who will create the service backend \u003Cbr /\u003E3. Someone to implement the algorithm (I will do some at least)! \u003Cp /\u003E  \u003Cstrong\u003EWhat I did before\u003C/strong\u003E\u003Cbr /\u003EI once created a demo application based on profiling research. The demo application was able to serve news which got personalised by giving articles an score (-2 --\u0026gt; 2). The personalization will be automatically adjusted and will work based on the following: \u003Cbr /\u003E1. There will be made a group of groups of interesting words for each article. \u003Cbr /\u003E2. The profiles will consist of a profile of there groups with scores based on the ratings. \u003Cp /\u003E The groups of interesting words will be made by an algorithm which I already created once and tested once. (see: \u003Ca href=\"http://onlinelibrary.wiley.com/doi/10.1002/meet.1450430154/abstract)\"\u003Ehttp://onlinelibrary.wiley.com/doi/10.1002/meet.1450430154/abstract)\u003C/a\u003E \u003Cbr /\u003EBasically it works with the following steps: \u003Cbr /\u003E1. Remove stop words \u003Cbr /\u003E2. Stemming (each word in the shortest form) \u003Cbr /\u003E3. Make a non directed graph of biagrams (combine all words off Article A with all words of Article B). \u003Cbr /\u003E4. Weight all edges with the EAMI-SP function which can e found in the research document). \u003Cbr /\u003E5. Create as much groups of words by removing edges with low scores. \u003Cbr /\u003E6. Result: The most imported words grouped by words which mean something to each other.\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003EKind regards,
+        \u003C/p\u003E\r\n\u003Cp\u003EMark Bakker\u003Cbr /\u003E\u003Ca href=\"http://www.twitter.com/markbakkernl\"\u003Ehttp://www.twitter.com/markbakkernl\u003C/a\u003E\u003C/p\u003E",
+        "tags":
+        [
+            {
+                "id":88,
+                "name":"android"
+            },
+            {
+                "id":818,
+                "name":"java"
+            },
+            {
+                "id":1308343,
+                "name":"pitchwinter2010"
+            }
+        ],
+        "site_id":1191595
+    },
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                ]
+            }
+        ],
+        "display_date":"2010/10/10 23:36:54 -0700",
+        "full_url":"http://app-incubator.xebia.com/project-pitch-hbased-simplex",
+        "title":"Project Pitch: HBased Simplex",
+        "is_private":false,
+        "user":null,
+        "id":30195039,
+        "body_html":"    \u003Cdiv style=\"direction: ltr; font-family: Tahoma; color: #000000; font-size: 13px;\"\u003E \u003Cdiv style=\"\"\u003E \u003Cdiv\u003E\u003Cb\u003ESay what?\u003C/b\u003E\u003C/div\u003E \u003Cp /\u003E \u003Cdiv\u003E\u003Ca href=\"http://en.wikipedia.org/wiki/Linear_programming\"\u003ELinear programming\u003C/a\u003E is a technique from the field of operations research for solving optimization problems. It has a kazillion applications,
+         ranging from product mix optimizations (think oil refinery) to railway planning,
+         scheduling problems,
+         solving rummikub,
+         and deciding what to schedule first if you develop your software using the incremental funding method outlined in Software by Numbers.\u003C/div\u003E \u003Cp /\u003E \u003Cp /\u003E \u003Cdiv\u003E\u003Cb\u003ESo what?\u003C/b\u003E\u003C/div\u003E \u003Cp /\u003E \u003Cdiv\u003EThere are a couple of linear programming solvers out there. Some of them are based on a commercial license (CPLEX),
+         others on open source license (lpsolve). All of those solvers rely on implementations of the \u003Ca href=\"http://en.wikipedia.org/wiki/Simplex_algorithm\"\u003ESimplex\u003C/a\u003E method,
+         which in turn relies on matrix operations,
+         where the size of the matrix is based on the number of variables in the optimization problem; when the number of variables is increasing,
+         the time to find a solution is increasing as well. (And it will get worse if some of the variables can have integer solutions only.)\u003C/div\u003E \u003Cp /\u003E \u003Cdiv\u003ELooking at the solution strategy,
+         it seems that it could be easily distributed. By slicing the matrix in smaller portions,
+         each one of them holding only a fraction of the rows,
+         most of the hard work could be done by the individual nodes of a cluster. This is where Hadoop and HBase come in into play. Looking at the architecture of HBase,
+         it seems that it would be able to handle bigger data collections quite well. (Column-oriented databases would be much better at handling the number of columns needed to represent big matrices.) And the Simplex method seems to map perfectly on a map-reduce type of approach.\u0026nbsp;\u003C/div\u003E \u003Cp /\u003E \u003Cp /\u003E \u003Cdiv\u003E\u003Cb\u003ENow what?\u003C/b\u003E\u003C/div\u003E \u003Cp /\u003E \u003Cdiv\u003ESo,
+         this pitch is basically about giving it a go. The \u003Ca href=\"https://docs.google.com/fileview?id=0BzMiIpSOZbEAMDRhZGFiZmYtMmMwYi00ZThhLWI0Y2ItMDc2ZmVmZGFlYmUz\u0026amp;hl=nl\u0026amp;authkey=CIPh_I0D\"\u003E PDF linked here\u003C/a\u003E shows the Simplex method at work,
+         and illustrates how a typical Simplex approach could be partitioned across multiple HBase nodes. There is plenty of reference material out there that would allow us to test our approach. You would not only learn about a technique that performa significantly better on optimization problems than brute force,
+         but you would also get a chance to use Hadoop and HBase in new and unforeseen ways. AFAICT,
+         nothing like this has been done before. Completing it will give you serious bragging rights.\u0026nbsp;\u003C/div\u003E \u003Cp /\u003E \u003Cp /\u003E \u003Cp /\u003E \u003C/div\u003E \u003C/div\u003E",
+        "body_full":"    \u003Cdiv style=\"direction: ltr; font-family: Tahoma; color: #000000; font-size: 13px;\"\u003E \u003Cdiv style=\"\"\u003E \u003Cdiv\u003E\u003Cb\u003ESay what?\u003C/b\u003E\u003C/div\u003E \u003Cp /\u003E \u003Cdiv\u003E\u003Ca href=\"http://en.wikipedia.org/wiki/Linear_programming\"\u003ELinear programming\u003C/a\u003E is a technique from the field of operations research for solving optimization problems. It has a kazillion applications,
+         ranging from product mix optimizations (think oil refinery) to railway planning,
+         scheduling problems,
+         solving rummikub,
+         and deciding what to schedule first if you develop your software using the incremental funding method outlined in Software by Numbers.\u003C/div\u003E \u003Cp /\u003E \u003Cp /\u003E \u003Cdiv\u003E\u003Cb\u003ESo what?\u003C/b\u003E\u003C/div\u003E \u003Cp /\u003E \u003Cdiv\u003EThere are a couple of linear programming solvers out there. Some of them are based on a commercial license (CPLEX),
+         others on open source license (lpsolve). All of those solvers rely on implementations of the \u003Ca href=\"http://en.wikipedia.org/wiki/Simplex_algorithm\"\u003ESimplex\u003C/a\u003E method,
+         which in turn relies on matrix operations,
+         where the size of the matrix is based on the number of variables in the optimization problem; when the number of variables is increasing,
+         the time to find a solution is increasing as well. (And it will get worse if some of the variables can have integer solutions only.)\u003C/div\u003E \u003Cp /\u003E \u003Cdiv\u003ELooking at the solution strategy,
+         it seems that it could be easily distributed. By slicing the matrix in smaller portions,
+         each one of them holding only a fraction of the rows,
+         most of the hard work could be done by the individual nodes of a cluster. This is where Hadoop and HBase come in into play. Looking at the architecture of HBase,
+         it seems that it would be able to handle bigger data collections quite well. (Column-oriented databases would be much better at handling the number of columns needed to represent big matrices.) And the Simplex method seems to map perfectly on a map-reduce type of approach.\u0026nbsp;\u003C/div\u003E \u003Cp /\u003E \u003Cp /\u003E \u003Cdiv\u003E\u003Cb\u003ENow what?\u003C/b\u003E\u003C/div\u003E \u003Cp /\u003E \u003Cdiv\u003ESo,
+         this pitch is basically about giving it a go. The \u003Ca href=\"https://docs.google.com/fileview?id=0BzMiIpSOZbEAMDRhZGFiZmYtMmMwYi00ZThhLWI0Y2ItMDc2ZmVmZGFlYmUz\u0026amp;hl=nl\u0026amp;authkey=CIPh_I0D\"\u003E PDF linked here\u003C/a\u003E shows the Simplex method at work,
+         and illustrates how a typical Simplex approach could be partitioned across multiple HBase nodes. There is plenty of reference material out there that would allow us to test our approach. You would not only learn about a technique that performa significantly better on optimization problems than brute force,
+         but you would also get a chance to use Hadoop and HBase in new and unforeseen ways. AFAICT,
+         nothing like this has been done before. Completing it will give you serious bragging rights.\u0026nbsp;\u003C/div\u003E \u003Cp /\u003E \u003Cp /\u003E \u003Cp /\u003E \u003C/div\u003E \u003C/div\u003E",
+        "tags":
+        [
+            {
+                "id":1308343,
+                "name":"pitchwinter2010"
+            }
+        ],
+        "site_id":1191595
+    },
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                ]
+            }
+        ],
+        "display_date":"2010/10/10 09:41:00 -0700",
+        "full_url":"http://app-incubator.xebia.com/project-pitch-the-xebia-blog-recommendation-c",
+        "title":"Project Pitch: The Xebia Blog recommendation center",
+        "is_private":false,
+        "user":
+        {
+            "profile_pic":"http://posterous.com/images/profile/unknown75.gif",
+            "last_activity":"2010/10/12 04:24:14 -0700",
+            "nickname":"lieke",
+            "lastname":null,
+            "id":770982,
+            "firstname":null
+        },
+        "id":30157790,
+        "body_html":"\u003Cp\u003EOne of the core values of Xebia is that we want to share knowledge. Currently one of the main vehicles to share that knowledge is the Xebia blog,
+         visited by developers,
+         scrum enthusiasts and architects from all over the world. Because we Xebians never do things in a half-ass way,
+         the sheer amount of knowledge shared there has become so huge that the blog is starting to become practically unnavigable (200+ articles on Java,
+         100+ articles on Agile etc etc). \u003Cp /\u003EAs a solution for this problem I propose to build a blog recommendation center,
+         where a blog visitor will be recommended to read some other related blog(s) based on the one he/she has just read.\u003Cp /\u003EThe plan is to explore ways how different blogs relate to one another and how a recommendation can be extracted from these different inputs. As you might have guessed already this will feature some heavy natural language processing and probably some kind of neural network that needs to be trained on the currently available data set.\u003Cp /\u003E\u0026lt;!--more--\u0026gt;\u003Cp /\u003EBecause this is quite an ambitious undertaking I thought it would be best to stick to a reasonably conventional technology stack (eg Java) and keep the deliverables as simple as possible:\u003Cp /\u003E- Be able to read and parse blogs\u003Cbr /\u003E- Determine some other inputs that might be useful (the author,
+         google pagerank,
+         no. of hits)\u003Cbr /\u003E- Prepare a test set\u003Cbr /\u003E- Set up a system (might be a neural network) to feed the data to\u003Cbr /\u003E- Set up a way to train this system (for example: we present blog readers two recommendations and use the clicking behavior to train our system with)\u003Cp /\u003EFortunately,
+         there are already some great Java libraries out there for natural language processing and neural networks so you don't need an AI degree to participate on this project.\u003C/p\u003E",
+        "body_full":"\u003Cp\u003EOne of the core values of Xebia is that we want to share knowledge. Currently one of the main vehicles to share that knowledge is the Xebia blog,
+         visited by developers,
+         scrum enthusiasts and architects from all over the world. Because we Xebians never do things in a half-ass way,
+         the sheer amount of knowledge shared there has become so huge that the blog is starting to become practically unnavigable (200+ articles on Java,
+         100+ articles on Agile etc etc). \u003Cp /\u003EAs a solution for this problem I propose to build a blog recommendation center,
+         where a blog visitor will be recommended to read some other related blog(s) based on the one he/she has just read.\u003Cp /\u003EThe plan is to explore ways how different blogs relate to one another and how a recommendation can be extracted from these different inputs. As you might have guessed already this will feature some heavy natural language processing and probably some kind of neural network that needs to be trained on the currently available data set.\u003Cp /\u003E\u0026lt;!--more--\u0026gt;\u003Cp /\u003EBecause this is quite an ambitious undertaking I thought it would be best to stick to a reasonably conventional technology stack (eg Java) and keep the deliverables as simple as possible:\u003Cp /\u003E- Be able to read and parse blogs\u003Cbr /\u003E- Determine some other inputs that might be useful (the author,
+         google pagerank,
+         no. of hits)\u003Cbr /\u003E- Prepare a test set\u003Cbr /\u003E- Set up a system (might be a neural network) to feed the data to\u003Cbr /\u003E- Set up a way to train this system (for example: we present blog readers two recommendations and use the clicking behavior to train our system with)\u003Cp /\u003EFortunately,
+         there are already some great Java libraries out there for natural language processing and neural networks so you don't need an AI degree to participate on this project.\u003C/p\u003E",
+        "tags":
+        [
+            {
+                "id":1308343,
+                "name":"pitchwinter2010"
+            }
+        ],
+        "site_id":1191595
+    },
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                ]
+            }
+        ],
+        "display_date":"2010/10/10 01:30:00 -0700",
+        "full_url":"http://app-incubator.xebia.com/project-pitch-youll-never-walk-too-far-findin",
+        "title":"Project Pitch: You'll never walk too far - Finding running routes by distance",
+        "is_private":false,
+        "user":null,
+        "id":30130337,
+        "body_html":"\u003Cdiv style=\"text-align: left;\"\u003ENothing is more annoying than starting a training run and ending up with a much longer or shorter distance than planned.\u003C/div\u003E\r\n\u003Cdiv\u003EWhat we want is to enter a starting point and a distance. The result should be a track that is exactly that length,
+         displayed on a map in the web browser.\u003C/div\u003E\r\n\u003Cp /\u003E\r\n\u003Cdiv\u003EpgRouting is an extension for PostGis which only supports shortest path and the traveling sales man algorithm. The goal of this incubator project is implementing a pgRouting algorithm to find routes that are closest to a given distance and display the route on a map and eventually donate the code to the pgRouting community.\u003C/div\u003E\r\n\u003Cp /\u003E\r\n\u003Cdiv\u003E\u003Cstrong\u003EWhat\u003C/strong\u003E\u003C/div\u003E\r\n\u003Cdiv\u003E- setting up the environment (install OpenGeo Suite and add pgRouting)\u003C/div\u003E\r\n\u003Cdiv\u003E- load a route network in PostGis\u003C/div\u003E\r\n\u003Cdiv\u003E- find all the possible routes and sort them by distance (given a starting point and a distance)\u003C/div\u003E\r\n\u003Cdiv\u003E- display the routes closest to a distance on a map (OpenLayers with OpenStreetMap)\u003C/div\u003E\r\n\u003Cdiv\u003E- optimize the algorithm\u003C/div\u003E\r\n\u003Cdiv\u003E- add via points\u003C/div\u003E\r\n\u003Cp /\u003E\r\n\u003Cdiv\u003E\u003Cstrong\u003ETechnology stack\u003C/strong\u003E\u003C/div\u003E\r\n\u003Cdiv\u003E- Javascript to display the map\u003C/div\u003E\r\n\u003Cdiv\u003E- PL/pgSql to create the algorithm\u003C/div\u003E\r\n\u003Cp /\u003E\r\n\u003Cdiv\u003E\u003Cstrong\u003EMore information\u003C/strong\u003E\u003C/div\u003E\r\n\u003Cdiv\u003E\u003Ca href=\"http://pgrouting.postlbs.org/\"\u003Ehttp://pgrouting.postlbs.org/\u003C/a\u003E\u003C/div\u003E\r\n\u003Cdiv\u003E\u003Ca href=\"http://opengeo.org/products/suite/\"\u003Ehttp://opengeo.org/products/suite/\u003C/a\u003E\u003C/div\u003E\r\n\u003Cdiv\u003EAsk Kris or Jeroen vW\u003C/div\u003E",
+        "body_full":"\u003Cdiv style=\"text-align: left;\"\u003ENothing is more annoying than starting a training run and ending up with a much longer or shorter distance than planned.\u003C/div\u003E\r\n\u003Cdiv\u003EWhat we want is to enter a starting point and a distance. The result should be a track that is exactly that length,
+         displayed on a map in the web browser.\u003C/div\u003E\r\n\u003Cp /\u003E\r\n\u003Cdiv\u003EpgRouting is an extension for PostGis which only supports shortest path and the traveling sales man algorithm. The goal of this incubator project is implementing a pgRouting algorithm to find routes that are closest to a given distance and display the route on a map and eventually donate the code to the pgRouting community.\u003C/div\u003E\r\n\u003Cp /\u003E\r\n\u003Cdiv\u003E\u003Cstrong\u003EWhat\u003C/strong\u003E\u003C/div\u003E\r\n\u003Cdiv\u003E- setting up the environment (install OpenGeo Suite and add pgRouting)\u003C/div\u003E\r\n\u003Cdiv\u003E- load a route network in PostGis\u003C/div\u003E\r\n\u003Cdiv\u003E- find all the possible routes and sort them by distance (given a starting point and a distance)\u003C/div\u003E\r\n\u003Cdiv\u003E- display the routes closest to a distance on a map (OpenLayers with OpenStreetMap)\u003C/div\u003E\r\n\u003Cdiv\u003E- optimize the algorithm\u003C/div\u003E\r\n\u003Cdiv\u003E- add via points\u003C/div\u003E\r\n\u003Cp /\u003E\r\n\u003Cdiv\u003E\u003Cstrong\u003ETechnology stack\u003C/strong\u003E\u003C/div\u003E\r\n\u003Cdiv\u003E- Javascript to display the map\u003C/div\u003E\r\n\u003Cdiv\u003E- PL/pgSql to create the algorithm\u003C/div\u003E\r\n\u003Cp /\u003E\r\n\u003Cdiv\u003E\u003Cstrong\u003EMore information\u003C/strong\u003E\u003C/div\u003E\r\n\u003Cdiv\u003E\u003Ca href=\"http://pgrouting.postlbs.org/\"\u003Ehttp://pgrouting.postlbs.org/\u003C/a\u003E\u003C/div\u003E\r\n\u003Cdiv\u003E\u003Ca href=\"http://opengeo.org/products/suite/\"\u003Ehttp://opengeo.org/products/suite/\u003C/a\u003E\u003C/div\u003E\r\n\u003Cdiv\u003EAsk Kris or Jeroen vW\u003C/div\u003E",
+        "tags":
+        [
+            {
+                "id":1308343,
+                "name":"pitchwinter2010"
+            }
+        ],
+        "site_id":1191595
+    },
+    {
+        "media":
+        [
+            {
+                "audio_files":
+                [
+                ]
+            },
+            {
+                "videos":
+                [
+                ]
+            },
+            {
+                "images":
+                [
+                ]
+            }
+        ],
+        "display_date":"2010/10/07 15:28:00 -0700",
+        "full_url":"http://app-incubator.xebia.com/project-pitch-logstore",
+        "title":"Project Pitch: LogStore",
+        "is_private":false,
+        "user":null,
+        "id":29943605,
+        "body_html":"\r\n\r\n\u003Cp\u003E\u003Cspan\u003EApplication logging is an always present non-functional feature of our applications. We do it usually by using common frameworks as SLF4J,
+         Log4J etc. Most of the time we do it by writing log entries to files on disk,
+         probably because next to writing it to the console,
+         it's the easiest way.\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp\u003ESearching log files for particular events is in my experience always a tedious task,
+         especially if they are scattered throughout multiple cluster nodes and spanning multiple applications/systems. Highlight in my career is the way of logging we did at Prorail. We used 2 ways:\u003C/p\u003E\r\n\u003Col\u003E\r\n\u003Cli\u003E\u003Cspan\u003E\u003Cspan style=\"\"\u003E\u003Cspan style=\"font: 7.0pt Times New Roman;\"\u003E\u0026nbsp;\u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003Cspan\u003EApplication logging through commons-logging and Log4J,
+         producing log files per cluster node,
+         using default logging formatting\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003E\u003Cspan style=\"\"\u003E\u003Cspan style=\"font: 7.0pt Times New Roman;\"\u003E\u0026nbsp;\u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003Cspan\u003ESystem logging through commons-logging and Log4J,
+         producing specially formatted log files per cluster node,
+         for feeding into a separate \"quality measuring system\" a.k.a. KMS\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ol\u003E\r\n\u003Cp\u003E\u003Cspan\u003EThis KMS application was used to track messages throughout the whole system,
+         spanning multiple applications,
+         and perform queries about those messages. Although I never had the honor of working with the application,
+         a well-known complaint was that it was dead-slow.\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp\u003EI would like to start a project on creating such a \"quality measuring system\",
+         but this time on steroids. And with steroids I mean big time NoSQL systems like CouchDB and ElasticSearch. Using these technologies we should be able to create a fast,
+         scalable,
+         portable and easy to integrate logging solution that enables us to search and link log statements in a breeze.\u003C/p\u003E\r\n\u003Cp\u003E\u0026lt;!--more--\u003E\u003C/p\u003E\r\n\u003Cp\u003EThe plan is to create a \u003Ca href=\"http://couchapp.org/page/index\"\u003ECouchApp\u003C/a\u003E on a logging database in CouchDB. The CouchApp will\u0026nbsp; contain several default views on the logging data among one that enables full-text search by using \u003Ca href=\"http://www.elasticsearch.com/\"\u003EElasticSearch\u003C/a\u003E. I will name it project LogStore (final name to be determined).\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EGoals\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EThere are several goals for this project:\u003C/p\u003E\r\n\u003Col\u003E\r\n\u003Cli\u003ELearn creating CouchApps by implementing a fairly simple case\u003C/li\u003E\r\n\u003Cli\u003ELearn about using CouchDB\u003C/li\u003E\r\n\u003Cli\u003ELearn about the possibillities of ElasticSearch\u003C/li\u003E\r\n\u003C/ol\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWork\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EThe following parts will be developed during the 12 hours we have:\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECouchDB design document for log entries\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECouchDB views for CouchApp pages (based on attributes of log entries)\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECouchApp pages for viewing LogStore contents\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ESimulation application (java/Scala) for loading log statements\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003EElasticSearch integration\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EPlanning\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EInitial planning would be as follows:\u003C/p\u003E\r\n\u003Cp\u003E\u003Cem\u003E\u003Cspan\u003EDay 1:\u003C/span\u003E\u003C/em\u003E\u003Cspan\u003E\u0026nbsp;\u003C/span\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate project layout for easy CouchApp deployment\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003EInstall CouchDB and create application database\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003EDefine design document for log entries\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003EGather test data (Prorail PUB logs?)\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u003Cem\u003E\u003Cspan\u003EDay 2:\u003C/span\u003E\u003C/em\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate Java/Scala app that pushes log lines per line and per chunk (configurable) to the LogStore\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate application selection page\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate default view (overview of latest loglines)\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate view per log entry type\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate view per log thread\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u003Cem\u003E\u003Cspan\u003EDay 3:\u003C/span\u003E\u003C/em\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan\u003EIntegrate ElasticSearch\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate pages for free text search\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n",
+        "body_full":"\r\n\r\n\u003Cp\u003E\u003Cspan\u003EApplication logging is an always present non-functional feature of our applications. We do it usually by using common frameworks as SLF4J,
+         Log4J etc. Most of the time we do it by writing log entries to files on disk,
+         probably because next to writing it to the console,
+         it's the easiest way.\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp\u003ESearching log files for particular events is in my experience always a tedious task,
+         especially if they are scattered throughout multiple cluster nodes and spanning multiple applications/systems. Highlight in my career is the way of logging we did at Prorail. We used 2 ways:\u003C/p\u003E\r\n\u003Col\u003E\r\n\u003Cli\u003E\u003Cspan\u003E\u003Cspan style=\"\"\u003E\u003Cspan style=\"font: 7.0pt Times New Roman;\"\u003E\u0026nbsp;\u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003Cspan\u003EApplication logging through commons-logging and Log4J,
+         producing log files per cluster node,
+         using default logging formatting\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003E\u003Cspan style=\"\"\u003E\u003Cspan style=\"font: 7.0pt Times New Roman;\"\u003E\u0026nbsp;\u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003Cspan\u003ESystem logging through commons-logging and Log4J,
+         producing specially formatted log files per cluster node,
+         for feeding into a separate \"quality measuring system\" a.k.a. KMS\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ol\u003E\r\n\u003Cp\u003E\u003Cspan\u003EThis KMS application was used to track messages throughout the whole system,
+         spanning multiple applications,
+         and perform queries about those messages. Although I never had the honor of working with the application,
+         a well-known complaint was that it was dead-slow.\u003C/span\u003E\u003C/p\u003E\r\n\u003Cp\u003EI would like to start a project on creating such a \"quality measuring system\",
+         but this time on steroids. And with steroids I mean big time NoSQL systems like CouchDB and ElasticSearch. Using these technologies we should be able to create a fast,
+         scalable,
+         portable and easy to integrate logging solution that enables us to search and link log statements in a breeze.\u003C/p\u003E\r\n\u003Cp\u003E\u0026lt;!--more--\u003E\u003C/p\u003E\r\n\u003Cp\u003EThe plan is to create a \u003Ca href=\"http://couchapp.org/page/index\"\u003ECouchApp\u003C/a\u003E on a logging database in CouchDB. The CouchApp will\u0026nbsp; contain several default views on the logging data among one that enables full-text search by using \u003Ca href=\"http://www.elasticsearch.com/\"\u003EElasticSearch\u003C/a\u003E. I will name it project LogStore (final name to be determined).\u003C/p\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EGoals\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EThere are several goals for this project:\u003C/p\u003E\r\n\u003Col\u003E\r\n\u003Cli\u003ELearn creating CouchApps by implementing a fairly simple case\u003C/li\u003E\r\n\u003Cli\u003ELearn about using CouchDB\u003C/li\u003E\r\n\u003Cli\u003ELearn about the possibillities of ElasticSearch\u003C/li\u003E\r\n\u003C/ol\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EWork\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EThe following parts will be developed during the 12 hours we have:\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECouchDB design document for log entries\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECouchDB views for CouchApp pages (based on attributes of log entries)\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECouchApp pages for viewing LogStore contents\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ESimulation application (java/Scala) for loading log statements\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003EElasticSearch integration\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n\u003Cp\u003E\u003Cstrong\u003EPlanning\u003C/strong\u003E\u003C/p\u003E\r\n\u003Cp\u003EInitial planning would be as follows:\u003C/p\u003E\r\n\u003Cp\u003E\u003Cem\u003E\u003Cspan\u003EDay 1:\u003C/span\u003E\u003C/em\u003E\u003Cspan\u003E\u0026nbsp;\u003C/span\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate project layout for easy CouchApp deployment\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003EInstall CouchDB and create application database\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003EDefine design document for log entries\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003EGather test data (Prorail PUB logs?)\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u003Cem\u003E\u003Cspan\u003EDay 2:\u003C/span\u003E\u003C/em\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate Java/Scala app that pushes log lines per line and per chunk (configurable) to the LogStore\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate application selection page\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate default view (overview of latest loglines)\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate view per log entry type\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate view per log thread\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u003Cem\u003E\u003Cspan\u003EDay 3:\u003C/span\u003E\u003C/em\u003E\u003C/p\u003E\r\n\u003Cul\u003E\r\n\u003Cli\u003E\u003Cspan\u003EIntegrate ElasticSearch\u003C/span\u003E\u003C/li\u003E\r\n\u003Cli\u003E\u003Cspan\u003ECreate pages for free text search\u003C/span\u003E\u003C/li\u003E\r\n\u003C/ul\u003E\r\n\u003Cp\u003E\u0026nbsp;\u003C/p\u003E\r\n",
+        "tags":
+        [
+            {
+                "id":859896,
+                "name":"couchapp"
+            },
+            {
+                "id":5980,
+                "name":"couchdb"
+            },
+            {
+                "id":111314,
+                "name":"nosql"
+            },
+            {
+                "id":1308343,
+                "name":"pitchwinter2010"
+            }
+        ],
+        "site_id":1191595
+    }
+]
