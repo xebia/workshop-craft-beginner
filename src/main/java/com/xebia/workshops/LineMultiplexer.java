@@ -1,4 +1,4 @@
-package com.example;
+package com.xebia.workshops;
 
 /**
  * The Line multiplexer can hold strings under a certain key and reproduce these strings per key in the order that they

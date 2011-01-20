@@ -1,4 +1,4 @@
-package com.example;
+package com.xebia.workshops;
 
 import java.util.HashMap;
 import java.util.LinkedList;

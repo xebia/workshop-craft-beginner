@@ -1,4 +1,4 @@
-package com.example;
+package com.xebia.workshops;
 
 import org.junit.Test;
 
