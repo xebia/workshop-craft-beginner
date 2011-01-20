@@ -14,7 +14,7 @@ public class LockingLineMultiplexer implements LineMultiplexer {
 
 
     @Override
-    public void addLineForKey(String line, String key) {
+    public void addLineForKey(String key, String line) {
         getQueueForKey(key).offer(line);
     }
 
