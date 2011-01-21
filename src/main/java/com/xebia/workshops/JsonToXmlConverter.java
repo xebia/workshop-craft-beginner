@@ -15,7 +15,7 @@ public class JsonToXmlConverter {
 
                 for (String item : items) {
                     xml.append("<item>");
-                    xml.append(item);
+                    xml.append(item.trim());
                     xml.append("</item>");
                 }
 
