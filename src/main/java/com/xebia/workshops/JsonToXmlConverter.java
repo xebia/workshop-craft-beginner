@@ -30,10 +30,10 @@ public class JsonToXmlConverter {
                 String[] nameValuePairs = json.trim().substring(1, json.length() - 1).split(",");
 
                 for (String nameValuePair : nameValuePairs) {
-                    String[] splitPair = nameValuePair.trim().split(":");
+                    String[] splitPair = nameValuePair.trim().split("\"\\s*:");
 
                     xml.append("<" + splitPair[0].replaceAll("\"", "") + ">");
-                    xml.append(splitPair[1].replaceAll("\"", ""));
+                    xml.append(splitPair[1].trim().replaceAll("\"", ""));
                     xml.append("</" + splitPair[0].replaceAll("\"", "") + ">");
                 }
 
