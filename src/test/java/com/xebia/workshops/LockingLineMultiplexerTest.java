@@ -1,5 +1,6 @@
 package com.xebia.workshops;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -23,37 +25,45 @@ public class LockingLineMultiplexerTest {
 
     @Test
     public void shouldReturnLineAddedForKey() throws Exception {
-        multiplexer.addLineForKey("This is the line", "Key");
-        assertThat(multiplexer.nextLineFor("Key"), is("This is the line"));
+        multiplexer.addLine("This is the line");
+        assertThat(multiplexer.nextLine(), is("This is the line"));
     }
 
     @Test
     public void shouldReturnLinesInRightOrder() throws Exception {
         String line1 = "This is the first line";
-        String key1 = "Key";
-        String line2 = "This is the first line";
-        String key2 = "Key";
-        multiplexer.addLineForKey(line1, key1);
-        multiplexer.addLineForKey(line2, key2);
-        assertThat(multiplexer.nextLineFor(key1), is(line1));
-        assertThat(multiplexer.nextLineFor(key2), is(line2));
+        String line2 = "This is the second line";
+        multiplexer.addLine(line1);
+        multiplexer.addLine(line2);
+        assertThat(multiplexer.nextLine(), is(line1));
+        assertThat(multiplexer.nextLine(), is(line2));
     }
 
     /* From here tests are concurrent */
-    @Test
+    @Test (timeout = 2000)
+    @Ignore //this test will fail in a deadlock
     public void shouldSurviveConcurrentAccess() throws Exception {
         CountDownLatch startTest = new CountDownLatch(1);
 
-        CountDownLatch allSent = addConcurrently(startTest, "key", "one", "two", "three", "four", "five", "six");
+        ArrayList<CountDownLatch> sentLatches = new ArrayList<CountDownLatch>();
+        int numberOfLinesAdded = 500;
+        for (int i = 0; i < numberOfLinesAdded; i++) {
+            sentLatches.add(addConcurrently(startTest, "line " + i));
+        }
         final List<String> results = new CopyOnWriteArrayList<String>();
-        CountDownLatch doneReading = readConcurrently(startTest, results, "key", 6);
+        CountDownLatch doneReading = readConcurrently(startTest, results, numberOfLinesAdded);
         startTest.countDown();
-        allSent.await();
+        for (CountDownLatch sentLatch : sentLatches) {
+            sentLatch.await();
+        }
         doneReading.await();
+        for (int i = 0; i < numberOfLinesAdded; i++) {
+            assertThat(results, hasItem("line " + i));
+        }
         System.out.println(results);
     }
 
-    private CountDownLatch addConcurrently(final CountDownLatch startTest, final String key, String... lines) {
+    private CountDownLatch addConcurrently(final CountDownLatch startTest,  String... lines) {
         final CountDownLatch allSent = new CountDownLatch(lines.length);
         for (final String line : lines) {
             executor.execute(new Runnable() {
@@ -64,7 +74,7 @@ public class LockingLineMultiplexerTest {
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
-                    multiplexer.addLineForKey(key, line);
+                    multiplexer.addLine(line);
                     allSent.countDown();
                 }
             });
@@ -72,7 +82,7 @@ public class LockingLineMultiplexerTest {
         return allSent;
     }
 
-    private CountDownLatch readConcurrently(final CountDownLatch startTest, final List<String> results, final String key, final int numberOfReads) {
+    private CountDownLatch readConcurrently(final CountDownLatch startTest, final List<String> results, final int numberOfReads) {
         final CountDownLatch doneReading = new CountDownLatch(numberOfReads);
         for (int i = 0; i < numberOfReads; i++) {
             executor.execute(new Runnable() {
@@ -83,11 +93,11 @@ public class LockingLineMultiplexerTest {
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
-                    String nextLine = multiplexer.nextLineFor(key);
+                    String nextLine = multiplexer.nextLine();
                     while (nextLine == null) {
-                        nextLine = multiplexer.nextLineFor(key);
+                        nextLine = multiplexer.nextLine();
                     }
-                    System.out.println("next line: "+nextLine);
+                    System.out.println("Read: "+nextLine);
                     results.add(nextLine);
                     doneReading.countDown();
                 }

@@ -8,12 +8,12 @@ package com.xebia.workshops;
  */
 public interface LineMultiplexer {
     /**
-     * Queue the given line for the given key
+     * Queue the given line
      */
-    void addLineForKey(String line ,String key);
+    public void addLine(String line);
 
     /**
-     * @return the line for the given key
+     * @return the line
      */
-    String nextLineFor(String key);
+    String nextLine();
 }

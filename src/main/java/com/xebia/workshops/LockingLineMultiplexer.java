@@ -10,23 +10,28 @@ import java.util.Queue;
  */
 public class LockingLineMultiplexer implements LineMultiplexer {
 
-    private final Map<String, Queue<String>> queueMap = new HashMap<String, Queue<String>>();
+    private final Queue<String> work = new LinkedList<String>();
+
+    private final Object writeLock = new Object();
+
+    private final Object readLock = new Object();
 
 
     @Override
-    public void addLineForKey(String key, String line) {
-        getQueueForKey(key).offer(line);
-    }
-
-    private Queue<String> getQueueForKey(String key) {
-        if(!queueMap.containsKey(key)){
-            queueMap.put(key, new LinkedList<String>());
+    public void addLine(String line) {
+        synchronized (readLock) {
+            synchronized (writeLock) {
+                work.offer(line);
+            }
         }
-        return queueMap.get(key);
     }
 
     @Override
-    public String nextLineFor(String key) {
-        return getQueueForKey(key).poll();
+    public String nextLine() {
+        synchronized (writeLock) {
+            synchronized (readLock) {
+                return work.poll();
+            }
+        }
     }
 }
