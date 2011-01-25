@@ -8,7 +8,7 @@ public class JsonToXmlConverterTest {
     private JsonToXmlConverter converter = new JsonToXmlConverter();
 
     // ========================================================================
-    // Tests for simple, non-nested JSON and basic JSON data types
+    // Tests for simple, non-nested JSON arrays and basic JSON data types
     // ========================================================================
 
     @Test
@@ -76,6 +76,10 @@ public class JsonToXmlConverterTest {
         assertThat(converter.convert("[true \n, false  , \t  true]"), is("<array><item>true</item><item>false</item><item>true</item></array>"));
     }
 
+    // ========================================================================
+    // Tests for simple, non-nested JSON objects
+    // ========================================================================
+
     @Test
     public void shouldConvertTopLevelEmptyObject() {
         assertThat(converter.convert("{}"), is("<object></object>"));
@@ -84,6 +88,16 @@ public class JsonToXmlConverterTest {
     @Test
     public void shouldConvertTopLevelSimpleObjectWithSingleStringField() {
         assertThat(converter.convert("{\"field1\":\"value1\"}"), is("<object><field1>value1</field1></object>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelSimpleObjectWithSingleIntegerField() {
+        assertThat(converter.convert("{\"field1\":42}"), is("<object><field1>42</field1></object>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelSimpleObjectWithTwoStringFields() {
+        assertThat(converter.convert("{\"field1\":\"value1\",\"field2\":\"value2\"}"), is("<object><field1>value1</field1><field2>value2</field2></object>"));
     }
 
     @Test
