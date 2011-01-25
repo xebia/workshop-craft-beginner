@@ -17,13 +17,28 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
-    public void shouldConvertTopLevelArrayOfSingleNumber() {
+    public void shouldConvertTopLevelArrayOfSingleInteger() {
         assertThat(converter.convert("[1]"), is("<array><item>1</item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayOfSingleFloat() {
+        assertThat(converter.convert("[1.3]"), is("<array><item>1.3</item></array>"));
     }
 
     @Test
     public void shouldConvertTopLevelArrayOfSingleBoolean() {
         assertThat(converter.convert("[false]"), is("<array><item>false</item></array>"));
+    }
+
+    @Test(expected=IllegalStateException.class)
+    public void shouldFailOnTopLevelArrayOfSingleInvalidBooleanFalse() {
+        assertThat(converter.convert("[falce]"), is("<array><item>false</item></array>"));
+    }
+
+    @Test(expected=IllegalStateException.class)
+    public void shouldFailOnTopLevelArrayOfSingleInvalidBooleanTrue() {
+        assertThat(converter.convert("[trui]"), is("<array><item>true</item></array>"));
     }
 
     @Test

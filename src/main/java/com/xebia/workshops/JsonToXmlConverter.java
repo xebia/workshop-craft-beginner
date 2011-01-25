@@ -90,9 +90,9 @@ public class JsonToXmlConverter {
     }
 
     private int convertTrue(Reader reader, Writer writer) throws IOException {
-        int r = reader.read();
-        int u = reader.read();
-        int e = reader.read();
+        char r = (char) reader.read();
+        char u = (char) reader.read();
+        char e = (char) reader.read();
 
         if (r != 'r' || u != 'u' || e != 'e') {
             throw new IllegalStateException("Unexpected character. Expected 'true' but found 't" + r + u + e + "'");
@@ -104,10 +104,10 @@ public class JsonToXmlConverter {
     }
 
     private int convertFalse(Reader reader, Writer writer) throws IOException {
-        int a = reader.read();
-        int l = reader.read();
-        int s = reader.read();
-        int e = reader.read();
+        char a = (char) reader.read();
+        char l = (char) reader.read();
+        char s = (char) reader.read();
+        char e = (char) reader.read();
 
         if (a != 'a' || l != 'l' || s != 's' || e != 'e') {
             throw new IllegalStateException("Unexpected character. Expected 'false' but found 'f" + a + l + s + e + "'");
