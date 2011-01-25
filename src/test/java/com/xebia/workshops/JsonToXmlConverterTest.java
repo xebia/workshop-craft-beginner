@@ -12,27 +12,42 @@ public class JsonToXmlConverterTest {
     // ========================================================================
 
     @Test
-    public void shouldUseDefaultNameForTopLevelEmptyArray() {
+    public void shouldConvertTopLevelEmptyArray() {
         assertThat(converter.convert("[]"), is("<array></array>"));
     }
 
     @Test
-    public void shouldUseDefaultNameForTopLevelSingleElementArray() {
+    public void shouldConvertTopLevelArrayOfSingleNumber() {
         assertThat(converter.convert("[1]"), is("<array><item>1</item></array>"));
     }
 
     @Test
-    public void shouldUseDefaultNamesForTopLevelSimpleArray() {
+    public void shouldConvertTopLevelArrayOfSingleBoolean() {
+        assertThat(converter.convert("[false]"), is("<array><item>false</item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayOfNumbers() {
         assertThat(converter.convert("[1,2,3]"), is("<array><item>1</item><item>2</item><item>3</item></array>"));
     }
 
     @Test
-    public void shouldUseDefaultNamesForTopLevelSimpleArrayAndWhitespaceBetweenValues() {
-        assertThat(converter.convert("[1, 2, \n 3]"), is("<array><item>1</item><item>2</item><item>3</item></array>"));
+    public void shouldConvertTopLevelArrayWithWhitespaceBetweenNumbers() {
+        assertThat(converter.convert("[1 , 2, \n 3]"), is("<array><item>1</item><item>2</item><item>3</item></array>"));
     }
 
     @Test
-    public void shouldUseDefaultNameForTopLevelEmptyObject() {
+    public void shouldConvertTopLevelArrayOfBooleans() {
+        assertThat(converter.convert("[true,false,true]"), is("<array><item>true</item><item>false</item><item>true</item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayWithWhitespaceBetweenBoolean() {
+        assertThat(converter.convert("[true \n, false  , \t  true]"), is("<array><item>true</item><item>false</item><item>true</item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelEmptyObject() {
         assertThat(converter.convert("{}"), is("<object/>"));
     }
 

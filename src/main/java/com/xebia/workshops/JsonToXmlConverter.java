@@ -6,13 +6,8 @@ import java.io.*;
 public class JsonToXmlConverter {
     public String convert(String json) {
         Reader reader = new BufferedReader(new StringReader(json));
-        final StringWriter stringWriter = new StringWriter();
-        Writer writer = new BufferedWriter(stringWriter) {
-            public String toString() {
-                try {flush();} catch (IOException e) {}
-                return stringWriter.toString();
-            }
-        };
+        Writer stringWriter = new StringWriter();
+        Writer writer = new BufferedWriter(stringWriter);
 
         try {
             convert(reader, writer);
@@ -48,39 +43,11 @@ public class JsonToXmlConverter {
             } else if (Character.isWhitespace(c) || c == ']') {
                 c = reader.read();
             } else {
-                throw new IllegalStateException("Incorrect char -->" + (char) c + "<--");
+                throw new IllegalStateException("Unexpected character '" + (char) c + "' found.");
             }
         }
 
         return c;
-    }
-
-    private char convertNumber(char c, Reader reader, Writer writer) throws IOException {
-        while (c != ',' && c != ']') {
-            if (!Character.isWhitespace(c)) {
-                writer.write(c);
-            }
-
-            c = (char) reader.read();
-        }
-
-        return c;
-    }
-
-    private char convertTrue(Reader reader, Writer writer) {
-        throw new UnsupportedOperationException("convertTrue");
-    }
-
-    private char convertFalse(Reader reader, Writer writer) {
-        throw new UnsupportedOperationException("convertFalse");
-    }
-
-    private char convertString(Reader reader, Writer writer) {
-        throw new UnsupportedOperationException("convertString");
-    }
-
-    private char convertObject(Reader reader, Writer writer) {
-        throw new UnsupportedOperationException("convertObject");
     }
 
     private int convertArray(Reader reader, Writer writer) throws IOException {
@@ -108,6 +75,55 @@ public class JsonToXmlConverter {
         }
 
         return c;
+    }
+
+    private int convertNumber(int c, Reader reader, Writer writer) throws IOException {
+        while (c != ',' && c != ']') {
+            if (!Character.isWhitespace(c)) {
+                writer.write(c);
+            }
+
+            c = reader.read();
+        }
+
+        return c;
+    }
+
+    private int convertTrue(Reader reader, Writer writer) throws IOException {
+        int r = reader.read();
+        int u = reader.read();
+        int e = reader.read();
+
+        if (r != 'r' || u != 'u' || e != 'e') {
+            throw new IllegalStateException("Unexpected character. Expected 'true' but found 't" + r + u + e + "'");
+        }
+
+        writer.append("true");
+
+        return reader.read();
+    }
+
+    private int convertFalse(Reader reader, Writer writer) throws IOException {
+        int a = reader.read();
+        int l = reader.read();
+        int s = reader.read();
+        int e = reader.read();
+
+        if (a != 'a' || l != 'l' || s != 's' || e != 'e') {
+            throw new IllegalStateException("Unexpected character. Expected 'false' but found 'f" + a + l + s + e + "'");
+        }
+
+        writer.append("false");
+
+        return reader.read();
+    }
+
+    private char convertString(Reader reader, Writer writer) {
+        throw new UnsupportedOperationException("convertString");
+    }
+
+    private char convertObject(Reader reader, Writer writer) {
+        throw new UnsupportedOperationException("convertObject");
     }
 
     private boolean isNotIn(int c, int[] terminators) {
