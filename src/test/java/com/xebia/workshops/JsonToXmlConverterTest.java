@@ -17,6 +17,11 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
+    public void shouldUseDefaultNameForTopLevelSingleElementArray() {
+        assertThat(converter.convert("[1]"), is("<array><item>1</item></array>"));
+    }
+
+    @Test
     public void shouldUseDefaultNamesForTopLevelSimpleArray() {
         assertThat(converter.convert("[1,2,3]"), is("<array><item>1</item><item>2</item><item>3</item></array>"));
     }
@@ -61,5 +66,19 @@ public class JsonToXmlConverterTest {
     // Tests nested JSON
     // ========================================================================
 
+    @Test
+    public void shouldConvertTopLevelArrayWithSingleNestedArray() {
+        assertThat(converter.convert("[[1]]"), is("<array><item><array><item>1</item></array></item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayWithNestedArrays() {
+        assertThat(converter.convert("[1,[2,3, 4],[5 ,6,\n7]]"),
+            is("<array>" +
+                   "<item>1</item>" +
+                   "<item><array><item>2</item><item>3</item><item>4</item></array></item>" +
+                   "<item><array><item>5</item><item>6</item><item>7</item></array></item>" +
+               "</array>"));
+    }
     
 }
