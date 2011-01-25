@@ -57,7 +57,7 @@ public class JsonToXmlConverter {
 
         writer.append("</array>");
 
-        return reader.read(); // eat the last closing bracket
+        return reader.read(); // read pas the end of the array
     }
 
     private int convertArrayItems(Reader reader, Writer writer) throws IOException {
@@ -100,7 +100,7 @@ public class JsonToXmlConverter {
 
         writer.append("true");
 
-        return reader.read();
+        return reader.read(); // read past the end of the boolean
     }
 
     private int convertFalse(Reader reader, Writer writer) throws IOException {
@@ -115,11 +115,19 @@ public class JsonToXmlConverter {
 
         writer.append("false");
 
-        return reader.read();
+        return reader.read(); // read past the end of the boolean
     }
 
-    private char convertString(Reader reader, Writer writer) {
-        throw new UnsupportedOperationException("convertString");
+    private int convertString(Reader reader, Writer writer) throws IOException {
+        int c = reader.read();
+
+        while (c != '"') {
+            writer.write(c);
+
+            c = reader.read();
+        }
+
+        return reader.read(); // read past the end of the string
     }
 
     private char convertObject(Reader reader, Writer writer) {

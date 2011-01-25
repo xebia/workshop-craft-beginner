@@ -8,7 +8,7 @@ public class JsonToXmlConverterTest {
     private JsonToXmlConverter converter = new JsonToXmlConverter();
 
     // ========================================================================
-    // Tests for simple, non-nested JSON
+    // Tests for simple, non-nested JSON and basic JSON data types
     // ========================================================================
 
     @Test
@@ -42,6 +42,11 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
+    public void shouldConvertTopLevelArrayOfSingleString() {
+        assertThat(converter.convert("[\"string\"]"), is("<array><item>string</item></array>"));
+    }
+
+    @Test
     public void shouldConvertTopLevelArrayOfNumbers() {
         assertThat(converter.convert("[1,2,3]"), is("<array><item>1</item><item>2</item><item>3</item></array>"));
     }
@@ -63,7 +68,7 @@ public class JsonToXmlConverterTest {
 
     @Test
     public void shouldConvertTopLevelEmptyObject() {
-        assertThat(converter.convert("{}"), is("<object/>"));
+        assertThat(converter.convert("{}"), is("<object></object>"));
     }
 
     @Test
