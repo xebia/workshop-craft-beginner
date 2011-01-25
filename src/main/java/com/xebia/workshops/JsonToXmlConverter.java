@@ -124,6 +124,12 @@ public class JsonToXmlConverter {
         while (c != '"') {
             writer.write(c);
 
+            if (c == '\\') {
+                // escape sequence detected. next character should not be interpreted.
+                // WARNING: this code will go crazy for input containing illegal escape sequences, like a lone \ at the end of the string
+                writer.write(reader.read());
+            }
+
             c = reader.read();
         }
 

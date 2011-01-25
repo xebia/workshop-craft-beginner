@@ -47,6 +47,16 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
+    public void shouldConvertTopLevelArrayOfSingleStringWithEscapeSequences() {
+        assertThat(converter.convert("[\"str\\ni\\\\ng\\\\\"]"), is("<array><item>str\\ni\\\\ng\\\\</item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayOfSingleStringWithEscapedQuote() {
+        assertThat(converter.convert("[\"str\\\"ing\"]"), is("<array><item>str\\\"ing</item></array>"));
+    }
+
+    @Test
     public void shouldConvertTopLevelArrayOfNumbers() {
         assertThat(converter.convert("[1,2,3]"), is("<array><item>1</item><item>2</item><item>3</item></array>"));
     }
