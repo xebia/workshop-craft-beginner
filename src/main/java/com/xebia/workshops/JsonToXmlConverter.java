@@ -1,8 +1,148 @@
 package com.xebia.workshops;
 
 
+import java.io.*;
+import java.util.Arrays;
+
 public class JsonToXmlConverter {
     public String convert(String json) {
+        Reader reader = new BufferedReader(new StringReader(json));
+        final StringWriter stringWriter = new StringWriter();
+        Writer writer = new BufferedWriter(stringWriter) {
+            public String toString() {
+                try {flush();} catch (IOException e) {}
+                return stringWriter.toString();
+            }
+        };
+
+        try {
+            parseJson(reader, writer);
+
+            writer.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return stringWriter.toString();
+    }
+
+    private void parseJson(Reader reader, Writer writer) throws IOException {
+        int c = reader.read();
+
+        while (c != -1) {
+            if (c == '[') {
+                c = parseJsonArray(reader, writer);
+            } else if (c == '{') {
+                c = parseJsonObject(reader, writer);
+            } else if (c == '"') {
+                c = parseJsonString(reader, writer);
+            } else if (c == 'f') {
+                c = parseJsonFalse(reader, writer);
+            } else if (c == 't') {
+                c = parseJsonTrue(reader, writer);
+            } else if (Character.isDigit(c)) {
+                c = parseJsonNumber((char) c, reader, writer);
+            } else if (Character.isWhitespace(c) || c == ']') {
+                c = reader.read();
+            } else {
+                throw new IllegalStateException("Incorrect char -->" + (char) c + "<-- Written so far: " + writer.toString());
+            }
+        }
+    }
+
+    private char parseJsonNumber(char c, Reader reader, Writer writer) throws IOException {
+        while (c != ',' && c != ']') {
+            if (!Character.isWhitespace(c)) {
+                writer.write(c);
+            }
+
+            c = (char) reader.read();
+        }
+
+        return (char) c;
+    }
+
+    private char parseJsonTrue(Reader reader, Writer writer) {
+        throw new UnsupportedOperationException("parseJsonTrue");
+    }
+
+    private char parseJsonFalse(Reader reader, Writer writer) {
+        throw new UnsupportedOperationException("parseJsonFalse");
+    }
+
+    private char parseJsonString(Reader reader, Writer writer) {
+        throw new UnsupportedOperationException("parseJsonString");
+    }
+
+    private char parseJsonObject(Reader reader, Writer writer) {
+        throw new UnsupportedOperationException("parseJsonObject");
+    }
+
+    private int parseJsonArray(Reader reader, Writer writer) throws IOException {
+        writer.append("<array>");
+
+        int c = parseJsonArrayItems(reader, writer);
+
+        writer.append("</array>");
+
+        c = reader.read(); // eat the last closing bracket
+
+        return c;
+    }
+
+    private int parseJsonArrayItems(Reader reader, Writer writer) throws IOException {
+        int c = reader.read();
+        while (c != ']') {
+            writer.append("<item>");
+
+            c = parseJson(c, reader, writer, ']', ',');
+
+            writer.append("</item>");
+
+            if (c == ',') {
+                c = reader.read();
+            }
+        }
+
+        return c;
+    }
+
+    private int parseJson(int c, Reader reader, Writer writer, char... terminators) throws IOException {
+        while (isNotIn((char) c, terminators)) {
+            if (c == '[') {
+                c = parseJsonArray(reader, writer);
+            } else if (c == '{') {
+                c = parseJsonObject(reader, writer);
+            } else if (c == '"') {
+                c = parseJsonString(reader, writer);
+            } else if (c == 'f') {
+                c = parseJsonFalse(reader, writer);
+            } else if (c == 't') {
+                c = parseJsonTrue(reader, writer);
+            } else if (Character.isDigit(c)) {
+                c = parseJsonNumber((char) c, reader, writer);
+            } else if (Character.isWhitespace(c) || c == ']') {
+                c = reader.read();
+            } else {
+                throw new IllegalStateException("Incorrect char -->" + (char) c + "<--");
+            }
+        }
+
+        return c;
+    }
+
+    private boolean isNotIn(char c, char[] terminators) {
+        for (char terminator : terminators) {
+            if (terminator == c) {
+                return false;
+            }
+        }
+
+         return true;
+    }
+
+
+    public String oldConvert(String json) {
         StringBuilder xml = new StringBuilder(); //new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
         if (json.trim().startsWith("[")) {

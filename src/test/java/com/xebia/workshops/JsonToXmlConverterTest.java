@@ -13,7 +13,7 @@ public class JsonToXmlConverterTest {
 
     @Test
     public void shouldUseDefaultNameForTopLevelEmptyArray() {
-        assertThat(converter.convert("[]"), is("<array/>"));
+        assertThat(converter.convert("[]"), is("<array></array>"));
     }
 
     @Test
