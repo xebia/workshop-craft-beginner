@@ -3,6 +3,43 @@ package com.xebia.workshops;
 
 import java.io.*;
 
+/**
+ * Your mission, should you choose to accept it, is to finish and improve this code
+ * until it is something to be proud of. Of course all the tests should stay green.
+ *
+ * Hints:
+ *  - remove duplication
+ *  - look at the separation of concerns
+ *
+ * If that is not a mission impossible, feel free to choose one or more of the
+ * following extra tasks:
+ *
+ * - find corner cases that break this code and fix them
+ * - add support for self-closing tags (<array/> for [], <object/> for {}},
+ *   <item/> and <field_x/> for null values)
+ * - refactor whitespace handling into a special Reader implementation (separation of concerns, remember)
+ * - add some error reporting meta data to the above reader, like the current position,
+ *   the last 10 chars read (and the next 10 chars ?) so exceptions can be more helpful.
+ * - add support for escaping XML entities within strings using unicode sequences
+ * - or add support for adding CDATA around strings containing characters not allowed in XML
+ *
+ * Or, if you think all of the above is peanuts:
+ *
+ * - extract a real JSON parser from this code that produces an AST hierarchy something like this:
+ *
+ *   JValue (abstract)
+ *       JNull
+ *       JBoolean
+ *       JLong
+ *       JDouble
+ *       JString
+ *       JArray
+ *       JObject
+ *       JField
+ *
+ *  ...and then rewrite the XML converter to use that AST and produce XML that shows the types as element attributes.
+ *
+ */
 public class JsonToXmlConverter {
     public String convert(String json) {
         Reader reader = new BufferedReader(new StringReader(json));
