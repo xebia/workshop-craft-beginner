@@ -38,6 +38,8 @@ public class JsonToXmlConverter {
                 c = convertFalse(reader, writer);
             } else if (c == 't') {
                 c = convertTrue(reader, writer);
+            } else if (c == 'n') {
+                c = convertNull(reader, writer);
             } else if (Character.isDigit(c)) {
                 c = convertNumber((char) c, reader, writer);
             } else if (Character.isWhitespace(c) || c == ']' || c == '}') {
@@ -137,6 +139,24 @@ public class JsonToXmlConverter {
         return c;
     }
 
+    private int convertString(Reader reader, Writer writer) throws IOException {
+        int c = reader.read();
+
+        while (c != '"') {
+            writer.write(c);
+
+            if (c == '\\') {
+                // escape sequence detected. next character should not be interpreted.
+                // WARNING: this code will go crazy for input containing illegal escape sequences, like a lone \ at the end of the string
+                writer.write(reader.read());
+            }
+
+            c = reader.read();
+        }
+
+        return reader.read(); // read past the end of the string
+    }
+
     private int convertTrue(Reader reader, Writer writer) throws IOException {
         char r = (char) reader.read();
         char u = (char) reader.read();
@@ -166,22 +186,16 @@ public class JsonToXmlConverter {
         return reader.read(); // read past the end of the boolean
     }
 
-    private int convertString(Reader reader, Writer writer) throws IOException {
-        int c = reader.read();
+    private int convertNull(Reader reader, Writer writer) throws IOException {
+        char u = (char) reader.read();
+        char l1 = (char) reader.read();
+        char l2 = (char) reader.read();
 
-        while (c != '"') {
-            writer.write(c);
-
-            if (c == '\\') {
-                // escape sequence detected. next character should not be interpreted.
-                // WARNING: this code will go crazy for input containing illegal escape sequences, like a lone \ at the end of the string
-                writer.write(reader.read());
-            }
-
-            c = reader.read();
+        if (u != 'u' || l1 != 'l' || l2 != 'l') {
+            throw new IllegalStateException("Unexpected character. Expected 'null' but found 'n" + u + l1 + l2 + "'");
         }
 
-        return reader.read(); // read past the end of the string
+        return reader.read(); // read past the end of the boolean
     }
 
     private boolean isNotIn(int c, int[] terminators) {

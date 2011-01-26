@@ -98,6 +98,11 @@ public class JsonToXmlConverterTest {
             is("<array><item>string1</item><item>string2</item><item>string3</item></array>"));
     }
 
+    @Test
+    public void shouldConvertTopLevelArrayOfSingleNull() {
+        assertThat(converter.convert("[null]"), is("<array><item></item></array>"));
+    }
+
 
     // ========================================================================
     // Tests for simple, non-nested JSON objects
@@ -137,6 +142,11 @@ public class JsonToXmlConverterTest {
     @Test
     public void shouldConvertTopLevelObjectWithSingleFalseField() {
         assertThat(converter.convert("{\"field1\":false}"), is("<object><field1>false</field1></object>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelObjectWithSingleNullField() {
+        assertThat(converter.convert("{\"field1\":null}"), is("<object><field1></field1></object>"));
     }
 
     @Test
