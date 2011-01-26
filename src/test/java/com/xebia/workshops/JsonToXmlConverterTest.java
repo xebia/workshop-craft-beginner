@@ -104,6 +104,12 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
+    public void shouldConvertTopLevelEmptyObjectContainingWhitespace() {
+        assertThat(converter.convert("{ }"), is("<object></object>"));
+        assertThat(converter.convert("{ \n\t\t }"), is("<object></object>"));
+    }
+
+    @Test
     public void shouldConvertTopLevelObjectWithSingleStringField() {
         assertThat(converter.convert("{\"field1\":\"value1\"}"), is("<object><field1>value1</field1></object>"));
     }
@@ -198,6 +204,12 @@ public class JsonToXmlConverterTest {
     @Test
     public void shouldConvertTopLevelArrayWithNestedEmptyObject() {
         assertThat(converter.convert("[{}]"), is("<array><item><object></object></item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayWithNestedEmptyObjects() {
+        assertThat(converter.convert("[{},\n {} , {}]"),
+            is("<array><item><object></object></item><item><object></object></item><item><object></object></item></array>"));
     }
 
     @Test

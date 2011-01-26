@@ -97,6 +97,11 @@ public class JsonToXmlConverter {
         int c = reader.read();
 
         while (c != '}') {
+            if (Character.isWhitespace(c)) {
+                c = reader.read();
+                continue;
+            }
+
             fieldNameWriter = new StringWriter();
 
             c = convert(c, reader, fieldNameWriter, ':', '}');
@@ -104,7 +109,7 @@ public class JsonToXmlConverter {
             writer.append("<").append(fieldNameWriter.toString()).append(">");
 
             if (c != ':') {
-                throw new IllegalStateException("An object field be separated by a ':', not by a '" + (char) c + "'");
+                throw new IllegalStateException("An object field should be separated by a ':', not by a '" + (char) c + "'");
             }
 
             c = reader.read(); // move past the :
