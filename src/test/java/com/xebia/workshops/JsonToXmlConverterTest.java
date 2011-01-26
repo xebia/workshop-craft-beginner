@@ -17,13 +17,33 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
+    public void shouldConvertTopLevelEmptyArrayContainingWhitespace() {
+        assertThat(converter.convert("[ ]"), is("<array></array>"));
+        assertThat(converter.convert("[ \n\t  ]"), is("<array></array>"));
+    }
+
+    @Test
     public void shouldConvertTopLevelArrayOfSingleInteger() {
         assertThat(converter.convert("[1]"), is("<array><item>1</item></array>"));
+        assertThat(converter.convert("[42]"), is("<array><item>42</item></array>"));
     }
 
     @Test
     public void shouldConvertTopLevelArrayOfSingleFloat() {
-        assertThat(converter.convert("[1.3]"), is("<array><item>1.3</item></array>"));
+        assertThat(converter.convert("[0.3]"), is("<array><item>0.3</item></array>"));
+        assertThat(converter.convert("[111.333]"), is("<array><item>111.333</item></array>"));
+        assertThat(converter.convert("[3.14159265358979323846264338327950288]"), is("<array><item>3.14159265358979323846264338327950288</item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayOfNumbers() {
+        assertThat(converter.convert("[1,0.2,3.14159265358979323846264338327950288]"),
+            is("<array><item>1</item><item>0.2</item><item>3.14159265358979323846264338327950288</item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayWithWhitespaceBetweenNumbers() {
+        assertThat(converter.convert("[1 , 2, \n 3]"), is("<array><item>1</item><item>2</item><item>3</item></array>"));
     }
 
     @Test
@@ -42,6 +62,17 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
+    public void shouldConvertTopLevelArrayOfBooleans() {
+        assertThat(converter.convert("[true,false,true]"), is("<array><item>true</item><item>false</item><item>true</item></array>"));
+        assertThat(converter.convert("[false,true,false]"), is("<array><item>false</item><item>true</item><item>false</item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayWithWhitespaceBetweenBooleans() {
+        assertThat(converter.convert("[true \n, false  , \t  true]"), is("<array><item>true</item><item>false</item><item>true</item></array>"));
+    }
+
+    @Test
     public void shouldConvertTopLevelArrayOfSingleString() {
         assertThat(converter.convert("[\"string\"]"), is("<array><item>string</item></array>"));
     }
@@ -57,24 +88,11 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
-    public void shouldConvertTopLevelArrayOfNumbers() {
-        assertThat(converter.convert("[1,2,3]"), is("<array><item>1</item><item>2</item><item>3</item></array>"));
+    public void shouldConvertTopLevelArrayOfStrings() {
+        assertThat(converter.convert("[\"string1\" , \"string2\", \"string3\"]"),
+            is("<array><item>string1</item><item>string2</item><item>string3</item></array>"));
     }
 
-    @Test
-    public void shouldConvertTopLevelArrayWithWhitespaceBetweenNumbers() {
-        assertThat(converter.convert("[1 , 2, \n 3]"), is("<array><item>1</item><item>2</item><item>3</item></array>"));
-    }
-
-    @Test
-    public void shouldConvertTopLevelArrayOfBooleans() {
-        assertThat(converter.convert("[true,false,true]"), is("<array><item>true</item><item>false</item><item>true</item></array>"));
-    }
-
-    @Test
-    public void shouldConvertTopLevelArrayWithWhitespaceBetweenBooleans() {
-        assertThat(converter.convert("[true \n, false  , \t  true]"), is("<array><item>true</item><item>false</item><item>true</item></array>"));
-    }
 
     // ========================================================================
     // Tests for simple, non-nested JSON objects
@@ -143,12 +161,28 @@ public class JsonToXmlConverterTest {
 
 
     // ========================================================================
-    // Tests for nested arrays
+    // Tests for arrays containing other arrays and objects
     // ========================================================================
 
     @Test
-    public void shouldConvertTopLevelArrayWithSingleNestedArray() {
-        assertThat(converter.convert("[[1]]"), is("<array><item><array><item>1</item></array></item></array>"));
+    public void shouldConvertTopLevelArrayWithNestedEmptyArray() {
+        assertThat(converter.convert("[[]]"),
+            is("<array><item><array></array></item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayWithNestedEmptyArrays() {
+        assertThat(converter.convert("[[] ,[  \t], [\n]]"),
+            is("<array><item><array></array></item><item><array></array></item><item><array></array></item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayWithNestedArray() {
+        assertThat(converter.convert("[[1,2,3], \t []]"),
+            is("<array>" +
+               "<item><array><item>1</item><item>2</item><item>3</item></array></item>" +
+               "<item><array></array></item>" +
+               "</array>"));
     }
 
     @Test
@@ -160,5 +194,15 @@ public class JsonToXmlConverterTest {
                    "<item><array><item>5</item><item>6</item><item>7</item></array></item>" +
                "</array>"));
     }
-    
+
+    @Test
+    public void shouldConvertTopLevelArrayWithNestedEmptyObject() {
+        assertThat(converter.convert("[{}]"), is("<array><item><object></object></item></array>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelArrayWithSingleNestedObject() {
+        assertThat(converter.convert("[{\"field1\":\"value1\"}]"),
+            is("<array><item><object><field1>value1</field1></object></item></array>"));
+    }
 }

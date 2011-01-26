@@ -63,6 +63,11 @@ public class JsonToXmlConverter {
     private int convertArrayItems(Reader reader, Writer writer) throws IOException {
         int c = reader.read();
         while (c != ']') {
+            if (Character.isWhitespace(c)) {
+                c = reader.read();
+                continue;
+            }
+
             writer.append("<item>");
 
             c = convert(c, reader, writer, ']', ',');
