@@ -8,7 +8,7 @@ public class JsonToXmlConverterTest {
     private JsonToXmlConverter converter = new JsonToXmlConverter();
 
     // ========================================================================
-    // Tests for simple, non-nested JSON arrays and basic JSON data types
+    // Tests for top-level arrays and basic data types
     // ========================================================================
 
     @Test
@@ -72,7 +72,7 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
-    public void shouldConvertTopLevelArrayWithWhitespaceBetweenBoolean() {
+    public void shouldConvertTopLevelArrayWithWhitespaceBetweenBooleans() {
         assertThat(converter.convert("[true \n, false  , \t  true]"), is("<array><item>true</item><item>false</item><item>true</item></array>"));
     }
 
@@ -86,43 +86,64 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
-    public void shouldConvertTopLevelSimpleObjectWithSingleStringField() {
+    public void shouldConvertTopLevelObjectWithSingleStringField() {
         assertThat(converter.convert("{\"field1\":\"value1\"}"), is("<object><field1>value1</field1></object>"));
     }
 
     @Test
-    public void shouldConvertTopLevelSimpleObjectWithSingleIntegerField() {
+    public void shouldConvertTopLevelObjectWithSingleIntegerField() {
         assertThat(converter.convert("{\"field1\":42}"), is("<object><field1>42</field1></object>"));
     }
 
     @Test
-    public void shouldConvertTopLevelSimpleObjectWithTwoStringFields() {
+    public void shouldConvertTopLevelObjectWithSingleFloatField() {
+        assertThat(converter.convert("{\"field1\":42.0}"), is("<object><field1>42.0</field1></object>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelObjectWithSingleTrueField() {
+        assertThat(converter.convert("{\"field1\":true}"), is("<object><field1>true</field1></object>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelObjectWithSingleFalseField() {
+        assertThat(converter.convert("{\"field1\":false}"), is("<object><field1>false</field1></object>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelObjectWithTwoStringFields() {
         assertThat(converter.convert("{\"field1\":\"value1\",\"field2\":\"value2\"}"), is("<object><field1>value1</field1><field2>value2</field2></object>"));
     }
 
     @Test
-    public void shouldConvertTopLevelSimpleObjectWithTwoFields() {
-        assertThat(converter.convert("{\"field1\":\"value1\",\"field2\":42}"), is("<object><field1>value1</field1><field2>42</field2></object>"));
+    public void shouldConvertTopLevelObjectWithMixedFields() {
+        assertThat(converter.convert("{\"field1\":\"value1\",\"field2\":42,\"field3\":false,\"field4\":42.0}"),
+            is("<object>" +
+               "<field1>value1</field1>" +
+               "<field2>42</field2>" +
+               "<field3>false</field3>" +
+               "<field4>42.0</field4>" +
+               "</object>"));
     }
 
     @Test
-    public void shouldConvertTopLevelSimpleObjectWithFieldValuesContainingColons() {
+    public void shouldConvertTopLevelObjectWithFieldValuesContainingColons() {
         assertThat(converter.convert("{\"field1\":\"value:1\",\"field2\":\"value: 2\"}"), is("<object><field1>value:1</field1><field2>value: 2</field2></object>"));
     }
 
     @Test
-    public void shouldConvertTopLevelSimpleObjectWithTwoFieldsAndWhitespaceBetweenPairs() {
+    public void shouldConvertTopLevelObjectWithTwoFieldsAndWhitespaceBetweenPairs() {
         assertThat(converter.convert("{\"field1\":\"value1\" \n   , \n \t  \"field2\":false}"), is("<object><field1>value1</field1><field2>false</field2></object>"));
     }
 
     @Test
-    public void shouldConvertTopLevelSimpleObjectWithWhitespaceBetweenColons() {
+    public void shouldConvertTopLevelObjectWithWhitespaceBetweenColons() {
         assertThat(converter.convert("{\"field1\" : \"value:1\" , \"field2\" \n : \t \"value: 2\"}"), is("<object><field1>value:1</field1><field2>value: 2</field2></object>"));
     }
 
 
     // ========================================================================
-    // Tests nested JSON
+    // Tests for nested arrays
     // ========================================================================
 
     @Test
