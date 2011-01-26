@@ -78,6 +78,11 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
+    public void shouldConvertTopLevelArrayOfSingleStringContainingWhitespace() {
+        assertThat(converter.convert("[\"strings are funny things\"]"), is("<array><item>strings are funny things</item></array>"));
+    }
+
+    @Test
     public void shouldConvertTopLevelArrayOfSingleStringWithEscapeSequences() {
         assertThat(converter.convert("[\"str\\ni\\\\ng\\\\\"]"), is("<array><item>str\\ni\\\\ng\\\\</item></array>"));
     }
@@ -216,5 +221,37 @@ public class JsonToXmlConverterTest {
     public void shouldConvertTopLevelArrayWithSingleNestedObject() {
         assertThat(converter.convert("[{\"field1\":\"value1\"}]"),
             is("<array><item><object><field1>value1</field1></object></item></array>"));
+    }
+
+
+    // ========================================================================
+    // Tests for objects containing other objects and arrays
+    // ========================================================================
+
+    @Test
+    public void shouldConvertTopLevelObjectWithEmptyArrayAsFieldValue() {
+        assertThat(converter.convert("{\"field1\":[]}"),
+            is("<object><field1><array></array></field1></object>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelObjectWithArrayAsFieldValue() {
+        assertThat(converter.convert("{\"field1\":[1, 2 , 3], \"field2\":[\"1\" \n, \"2\" , \"3\"]}"),
+            is("<object>" +
+               "<field1><array><item>1</item><item>2</item><item>3</item></array></field1>" +
+               "<field2><array><item>1</item><item>2</item><item>3</item></array></field2>" +
+               "</object>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelObjectWithEmptyObjectAsFieldValue() {
+        assertThat(converter.convert("{\"field1\":{}}"),
+            is("<object><field1><object></object></field1></object>"));
+    }
+
+    @Test
+    public void shouldConvertTopLevelObjectWithObjectAsFieldValue() {
+        assertThat(converter.convert("{\"field1\":{\"field2\":\"value1\"}}"),
+            is("<object><field1><object><field2>value1</field2></object></field1></object>"));
     }
 }
