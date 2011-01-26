@@ -264,4 +264,65 @@ public class JsonToXmlConverterTest {
         assertThat(converter.convert("{\"field1\":{\"field2\":\"value1\"}}"),
             is("<object><field1><object><field2>value1</field2></object></field1></object>"));
     }
+
+
+    // ========================================================================
+    // Kitchen sink tests: if this doesn't break anything...
+    // ========================================================================
+
+    @Test
+    public void shouldConvertSampleTwitterOutput() {
+        // some JSON straight from Twitter with some nice Chinese text. Lots of fields removed for brevity
+        assertThat(
+            converter.convert("[\n" +
+                "  {\n" +
+                "    \"coordinates\": null,\n" +
+                "    \"favorited\": false,\n" +
+                "    \"created_at\": \"Thu Jan 20 15:22:50 +0000 2011\",\n" +
+                "    \"id_str\": \"28110206533632000\",\n" +
+                "    \"id\": 28110206533632000,\n" +
+                "    \"text\": \"\\u201c\\u5728\\u8fd9\\u4e2a\\u56fd\\u5bb6\\uff0c\\u65f6\\u95f4\\u662f\\u505c\\u6b62\\u4f4f\\u7684\\u3002\\u6240\\u6709\\u4e00\\u5207\\u90fd\\u88ab\\u51bb\\u7ed3\\u5728\\u4e8650\\u5e74\\u524d\\u3002\\u201d\\u5eb7\\u5fb7\\u65af\\u8bf4http:\\/\\/goo.gl\\/Gw8FZ  \\u300aLIFE\\u300b\\u6742\\u5fd7\\u7279\\u9080\\u8bf7\\u4e86\\u4e94\\u4f4d\\u83b7\\u5956\\u6444\\u5f71\\u5e08\\uff0c\\u6765\\u4e0e\\u8bfb\\u8005\\u5206\\u4eab\\u4ed6\\u4eec\\u5728\\u5317\\u671d\\u9c9c\\u5b9a\\u683c\\u4e0b\\u7684\\u5f71\\u50cf\\uff0c\\u4ee5\\u53ca\\u4ed6\\u4eec\\u6240\\u7ecf\\u5386\\u8fc7\\u7684\\u771f\\u5b9e\",\n" +
+                "    \"in_reply_to_status_id_str\": null,\n" +
+                "    \"user\": {\n" +
+                "      \"name\": \"\\u6c6a\\u82e5\\u6d77\",\n" +
+                "      \"profile_image_url\": \"http:\\/\\/a2.twimg.com\\/profile_images\\/587306890\\/my_shoes_ps_normal.jpg\",\n" +
+                "      \"id\": 15818674,\n" +
+                "      \"description\": \"\\u5b85\\u7537\\uff0c\\u6df1\\u5733\\u6253\\u5de5\\u4e2d\\u2026\\u2026\",\n" +
+                "      \"profile_background_image_url\": \"http:\\/\\/a3.twimg.com\\/a\\/1295376387\\/images\\/themes\\/theme1\\/bg.png\",\n" +
+                "      \"screen_name\": \"Ruohai\"\n" +
+                "    },\n" +
+                "    \"place\": null,\n" +
+                "    \"source\": \"\\u003Ca href=\\\"https:\\/\\/tuite.im\\\" rel=\\\"nofollow\\\"\\u003E\\u654f\\u611f\\u8bcd\\u003C\\/a\\u003E\",\n" +
+                "    \"in_reply_to_status_id\": null\n" +
+                "  }]"),
+            is(
+                "<array>" +
+                    "<item>" +
+                    "<object>" +
+                        "<coordinates></coordinates>" +
+                        "<favorited>false</favorited>" +
+                        "<created_at>Thu Jan 20 15:22:50 +0000 2011</created_at>" +
+                        "<id_str>28110206533632000</id_str>" +
+                        "<id>28110206533632000</id>" +
+                        "<text>\\u201c\\u5728\\u8fd9\\u4e2a\\u56fd\\u5bb6\\uff0c\\u65f6\\u95f4\\u662f\\u505c\\u6b62\\u4f4f\\u7684\\u3002\\u6240\\u6709\\u4e00\\u5207\\u90fd\\u88ab\\u51bb\\u7ed3\\u5728\\u4e8650\\u5e74\\u524d\\u3002\\u201d\\u5eb7\\u5fb7\\u65af\\u8bf4http:\\/\\/goo.gl\\/Gw8FZ  \\u300aLIFE\\u300b\\u6742\\u5fd7\\u7279\\u9080\\u8bf7\\u4e86\\u4e94\\u4f4d\\u83b7\\u5956\\u6444\\u5f71\\u5e08\\uff0c\\u6765\\u4e0e\\u8bfb\\u8005\\u5206\\u4eab\\u4ed6\\u4eec\\u5728\\u5317\\u671d\\u9c9c\\u5b9a\\u683c\\u4e0b\\u7684\\u5f71\\u50cf\\uff0c\\u4ee5\\u53ca\\u4ed6\\u4eec\\u6240\\u7ecf\\u5386\\u8fc7\\u7684\\u771f\\u5b9e</text>" +
+                        "<in_reply_to_status_id_str></in_reply_to_status_id_str>" +
+                        "<user>" +
+                            "<object>" +
+                                "<name>\\u6c6a\\u82e5\\u6d77</name>" +
+                                "<profile_image_url>http:\\/\\/a2.twimg.com\\/profile_images\\/587306890\\/my_shoes_ps_normal.jpg</profile_image_url>" +
+                                "<id>15818674</id>" +
+                                "<description>\\u5b85\\u7537\\uff0c\\u6df1\\u5733\\u6253\\u5de5\\u4e2d\\u2026\\u2026</description>" +
+                                "<profile_background_image_url>http:\\/\\/a3.twimg.com\\/a\\/1295376387\\/images\\/themes\\/theme1\\/bg.png</profile_background_image_url>" +
+                                "<screen_name>Ruohai</screen_name>" +
+                            "</object>" +
+                        "</user>" +
+                        "<place></place>" +
+                        "<source>\\u003Ca href=\\\"https:\\/\\/tuite.im\\\" rel=\\\"nofollow\\\"\\u003E\\u654f\\u611f\\u8bcd\\u003C\\/a\\u003E</source>" +
+                        "<in_reply_to_status_id></in_reply_to_status_id>" +
+                    "</object>" +
+                    "</item>" +
+                "</array>"));
+    }
+
+
 }
