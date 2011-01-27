@@ -151,7 +151,8 @@ public class JsonToXmlConverterTest {
 
     @Test
     public void shouldConvertTopLevelObjectWithTwoStringFields() {
-        assertThat(converter.convert("{\"field1\":\"value1\",\"field2\":\"value2\"}"), is("<object><field1>value1</field1><field2>value2</field2></object>"));
+        assertThat(converter.convert("{\"field1\":\"value1\",\"field2\":\"value2\"}"),
+            is("<object><field1>value1</field1><field2>value2</field2></object>"));
     }
 
     @Test
@@ -166,18 +167,27 @@ public class JsonToXmlConverterTest {
     }
 
     @Test
+    public void shouldConvertTopLevelObjectWithFieldNamesContainingColons() {
+        assertThat(converter.convert("{\"field:1\":\"value:1\",\"field:2\":\"value: 2\"}"),
+            is("<object><field:1>value:1</field:1><field:2>value: 2</field:2></object>"));
+    }
+
+    @Test
     public void shouldConvertTopLevelObjectWithFieldValuesContainingColons() {
-        assertThat(converter.convert("{\"field1\":\"value:1\",\"field2\":\"value: 2\"}"), is("<object><field1>value:1</field1><field2>value: 2</field2></object>"));
+        assertThat(converter.convert("{\"field1\":\"value:1\",\"field2\":\"value: 2\"}"),
+            is("<object><field1>value:1</field1><field2>value: 2</field2></object>"));
     }
 
     @Test
     public void shouldConvertTopLevelObjectWithTwoFieldsAndWhitespaceBetweenPairs() {
-        assertThat(converter.convert("{\"field1\":\"value1\" \n   , \n \t  \"field2\":false}"), is("<object><field1>value1</field1><field2>false</field2></object>"));
+        assertThat(converter.convert("{\"field1\":\"value1\" \n   , \n \t  \"field2\":false}"),
+            is("<object><field1>value1</field1><field2>false</field2></object>"));
     }
 
     @Test
     public void shouldConvertTopLevelObjectWithWhitespaceBetweenColons() {
-        assertThat(converter.convert("{\"field1\" : \"value:1\" , \"field2\" \n : \t \"value: 2\"}"), is("<object><field1>value:1</field1><field2>value: 2</field2></object>"));
+        assertThat(converter.convert("{\"field1\" : \"value:1\" , \"field2\" \n : \t \"value: 2\"}"),
+            is("<object><field1>value:1</field1><field2>value: 2</field2></object>"));
     }
 
 
@@ -233,6 +243,12 @@ public class JsonToXmlConverterTest {
             is("<array><item><object><field1>value1</field1></object></item></array>"));
     }
 
+    @Test
+    public void shouldConvertTopLevelArrayWithNestedEmptyObjectsAndArrays() {
+        assertThat(converter.convert("[{}, [] , {}]"),
+            is("<array><item><object></object></item><item><array></array></item><item><object></object></item></array>"));
+    }
+
 
     // ========================================================================
     // Tests for objects containing other objects and arrays
@@ -267,7 +283,7 @@ public class JsonToXmlConverterTest {
 
 
     // ========================================================================
-    // Kitchen sink tests: if this doesn't break anything...
+    // Kitchen sink tests: if this doesn't break it...
     // ========================================================================
 
     @Test
