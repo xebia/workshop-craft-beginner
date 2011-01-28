@@ -79,7 +79,7 @@ public class JsonToXmlConverter {
                 c = convertNull(reader, writer);
             } else if (Character.isDigit(c)) {
                 c = convertNumber((char) c, reader, writer);
-            } else if (Character.isWhitespace(c) || c == ']' || c == '}') {
+            } else if (Character.isWhitespace(c)) {
                 c = reader.read();
             } else {
                 throw new IllegalStateException("Unexpected character '" + (char) c + "' (" + c + ") found.");
@@ -92,14 +92,6 @@ public class JsonToXmlConverter {
     private int convertArray(Reader reader, Writer writer) throws IOException {
         writer.append("<array>");
 
-        convertArrayItems(reader, writer);
-
-        writer.append("</array>");
-
-        return reader.read(); // read pas the end of the array
-    }
-
-    private int convertArrayItems(Reader reader, Writer writer) throws IOException {
         int c = reader.read();
         while (c != ']') {
             if (Character.isWhitespace(c)) {
@@ -109,7 +101,7 @@ public class JsonToXmlConverter {
 
             writer.append("<item>");
 
-            c = convert(c, reader, writer, ']', ',');
+            c = convert(c, reader, writer, ',', ']');
 
             writer.append("</item>");
 
@@ -118,21 +110,14 @@ public class JsonToXmlConverter {
             }
         }
 
-        return c;
+        writer.append("</array>");
+
+        return reader.read(); // read pas the end of the array
     }
 
     private int convertObject(Reader reader, Writer writer) throws IOException {
         writer.append("<object>");
 
-        convertObjectFields(reader, writer);
-
-        writer.append("</object>");
-
-        return reader.read(); // read pas the end of the object
-    }
-
-    private int convertObjectFields(Reader reader, Writer writer) throws IOException {
-        StringWriter fieldNameWriter;
         int c = reader.read();
 
         while (c != '}') {
@@ -141,11 +126,19 @@ public class JsonToXmlConverter {
                 continue;
             }
 
-            fieldNameWriter = new StringWriter();
+            if (c != '"') {
+                throw new IllegalStateException("An object field name should start with a '\"' not with a '" + (char) c + "'");
+            }
 
-            c = convert(c, reader, fieldNameWriter, ':', '}');
+            StringWriter fieldNameWriter = new StringWriter();
+
+            c = convertString(reader, fieldNameWriter);
 
             writer.append("<").append(fieldNameWriter.toString()).append(">");
+
+            while (Character.isWhitespace(c)) {
+                c = reader.read();
+            }
 
             if (c != ':') {
                 throw new IllegalStateException("An object field should be separated by a ':', not by a '" + (char) c + "'");
@@ -161,7 +154,9 @@ public class JsonToXmlConverter {
             }
         }
 
-        return c;
+        writer.append("</object>");
+
+        return reader.read(); // read pas the end of the object
     }
 
     private int convertNumber(int c, Reader reader, Writer writer) throws IOException {
